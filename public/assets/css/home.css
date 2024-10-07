@@ -1,0 +1,32 @@
+
+/* banner section start  */
+.banner{
+    height: auto;
+    width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 97%, 52% 97%, 50% 100%, 48% 97%, 0 97%);
+}
+
+/* banner section end  */
+
+
+/* category section  */
+.categories-carousel .category{
+    height: auto;
+    width: 140px;
+}
+.categories-carousel .category .image{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(78, 78, 78, 0.322);
+}
+.cart-product{
+    overflow-x: auto;
+}
+/* category section  */
+
+
+
+

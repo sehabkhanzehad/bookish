@@ -1,0 +1,14 @@
+.shop{
+    margin-top: 1rem;
+}
+.side_cat_header{
+  background-color: #20a5fd !important;
+  padding: 10px 15px;
+  color: #fff !important;
+  font-size: 20px;
+  text-decoration: none;
+}
+.accordion-button::after{
+  color: white !important;
+  background-image: url(../images/svg/angle_down.svg) !important;
+}
