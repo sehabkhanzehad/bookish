@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="gramentheme" />
-    <meta name="description" content="Bookle - Book Store WooCommerce Html Template " />
+    <meta name="description" content="Bookish - Book Store E-Commerce" />
     <!-- ======== Page title ============ -->
-    <title>Bookle - Book Store WooCommerce Html Template</title>
+    <title>Bookish - Home</title>
     <!--<< Favcion >>-->
     <link rel="shortcut icon" href="{{ asset('newFrontend') }}/img/favicon.png" />
     <!--<< Bootstrap min.css >>-->
@@ -56,11 +56,14 @@
                 <span data-text-preloader="K" class="letters-loading">
                     K
                 </span>
-                <span data-text-preloader="L" class="letters-loading">
-                    L
+                <span data-text-preloader="I" class="letters-loading">
+                    I
                 </span>
-                <span data-text-preloader="E" class="letters-loading">
-                    E
+                <span data-text-preloader="S" class="letters-loading">
+                    S
+                </span>
+                <span data-text-preloader="H" class="letters-loading">
+                    H
                 </span>
             </div>
             <p class="text-center">Loading</p>
@@ -95,7 +98,7 @@
                 <div class="offcanvas__content">
                     <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                         <div class="offcanvas__logo">
-                            <a href="index.html">
+                            <a href="{{ route("front.home") }}">
                                 <img src="{{ asset('newFrontend') }}/img/logo/black-logo.svg" alt="logo-img" />
                             </a>
                         </div>
@@ -209,7 +212,7 @@
                         <div class="col-6 col-md-6 col-lg-10 col-xl-8 col-xxl-10">
                             <div class="header-left">
                                 <div class="logo">
-                                    <a href="index.html" class="header-logo">
+                                    <a href="{{ route("front.home") }}" class="header-logo">
                                         <img src="{{ asset('newFrontend') }}/img/logo/white-logo.svg"
                                             alt="logo-img" />
                                     </a>
@@ -219,18 +222,18 @@
                                         <nav>
                                             <ul>
                                                 <li>
-                                                    <a href="index.html">
+                                                    <a href="{{ route("front.home") }}">
                                                         Home
-                                                        <i class="fas fa-angle-down"></i>
+                                                        {{-- <i class="fas fa-angle-down"></i> --}}
                                                     </a>
-                                                    <ul class="submenu">
+                                                    {{-- <ul class="submenu">
                                                         <li>
                                                             <a href="index.html">Home 01</a>
                                                         </li>
                                                         <li>
                                                             <a href="index-2.html">Home 02</a>
                                                         </li>
-                                                    </ul>
+                                                    </ul> --}}
                                                 </li>
                                                 <li>
                                                     <a href="shop.html">
@@ -386,7 +389,7 @@
                         <div class="col-6 col-md-6 col-lg-10 col-xl-8 col-xxl-10">
                             <div class="header-left">
                                 <div class="logo">
-                                    <a href="index.html" class="header-logo">
+                                    <a href="{{ route("front.home") }}" class="header-logo">
                                         <img src="{{ asset('newFrontend') }}/img/logo/white-logo.svg"
                                             alt="logo-img" />
                                     </a>
@@ -396,18 +399,18 @@
                                         <nav id="mobile-menu">
                                             <ul>
                                                 <li>
-                                                    <a href="index.html">
+                                                    <a href="{{ route("front.home") }}">
                                                         Home
-                                                        <i class="fas fa-angle-down"></i>
+                                                        {{-- <i class="fas fa-angle-down"></i> --}}
                                                     </a>
-                                                    <ul class="submenu">
+                                                    {{-- <ul class="submenu">
                                                         <li>
                                                             <a href="index.html">Home 01</a>
                                                         </li>
                                                         <li>
                                                             <a href="index-2.html">Home 02</a>
                                                         </li>
-                                                    </ul>
+                                                    </ul> --}}
                                                 </li>
                                                 <li>
                                                     <a href="shop.html">
@@ -758,7 +761,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                         <div class="single-footer-widget">
                             <div class="widget-head">
-                                <a href="index.html">
+                                <a href="{{ route("front.home") }}">
                                     <img src="{{ asset('newFrontend') }}/img/logo/white-logo.svg"
                                         alt="logo-img" />
                                 </a>

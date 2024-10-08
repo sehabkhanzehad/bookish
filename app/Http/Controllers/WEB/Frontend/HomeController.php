@@ -114,7 +114,7 @@ class HomeController extends Controller
 
         $cart = session()->get('cart', []);
 
-        // dd($subjects);
+        $newPublished = Product::latest()->get();
 
         // return view('frontend.home.index', compact(
         return view('newFrontend.pages.index', compact(
@@ -147,7 +147,8 @@ class HomeController extends Controller
             'popularCats',
             'popularProducts',
             'offer',
-            'ebook_list'
+            'ebook_list',
+            'newPublished',     // new
         ));
     }
 

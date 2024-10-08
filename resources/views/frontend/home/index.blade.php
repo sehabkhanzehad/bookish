@@ -303,6 +303,8 @@
                     @endforelse
                 </div>
             </div>
+
+
             <div class="text-center section_title d-none">
                 <a href="{{ route('front.shop') }}" class="btn btn-warning">সকল নতুন প্রকাশিত বই</a>
             </div>
@@ -471,7 +473,8 @@
         @if ($after_best_seller)
             <div class="container mt-3">
                 <a href="#">
-                    <img src="{{ asset('uploads/banners/' . $after_best_seller->image) }}" alt="" class="col-12">
+                    <img src="{{ asset('uploads/banners/' . $after_best_seller->image) }}" alt=""
+                        class="col-12">
                 </a>
             </div>
         @endif
@@ -553,7 +556,8 @@
                 @foreach ($before_other_products as $banner)
                     <div class="col-lg-3 col-md-3 col-6 mb-3">
                         <div class="banner2">
-                            <img src="{{ asset('uploads/banners/' . $banner->image) }}" alt="" class="img-fluid">
+                            <img src="{{ asset('uploads/banners/' . $banner->image) }}" alt=""
+                                class="img-fluid">
                         </div>
                     </div>
                 @endforeach
@@ -718,6 +722,8 @@
             </section>
         @endforeach
     @endif
+
+
     <section>
         <div class="container mt-3">
             <div class="row">
@@ -1129,7 +1135,6 @@
             });
         });
     </script>
-
 
     <script></script>
 @endpush
