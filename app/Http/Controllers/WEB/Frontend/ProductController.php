@@ -78,8 +78,8 @@ class ProductController extends Controller
         // dd($reviews);
 
         // dd($product);
-
-        return view('frontend.product.show', compact('product', 'firstColumns', 'secondColumns', 'thirdColumns', 'title', 'Specification', 'relatedProducts', 'reviews'));
+        // frontend.product.show
+        return view('newFrontend.pages.product-details', compact('product', 'firstColumns', 'secondColumns', 'thirdColumns', 'title', 'Specification', 'relatedProducts', 'reviews'));
     }
 
 
@@ -206,14 +206,14 @@ class ProductController extends Controller
         return view('frontend.product.brand-wise-product', compact('products'));
 
     }
-    
+
     public function getProductFile(Request $request)
     {
         $productId = $request->id;
         $product=Product::find($productId);
-       
+
         $fileUrl = 'https://softitglobal.xyz/wafilife/public/'.$product->read_file;
-      
+
         return response()->json(['file_url' => $fileUrl]);
     }
 

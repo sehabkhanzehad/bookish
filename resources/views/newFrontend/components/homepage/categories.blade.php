@@ -4,7 +4,7 @@
          <div class="book-catagories-wrapper">
              <div class="section-title text-center">
                  <h2 class="wow fadeInUp" data-wow-delay=".3s">
-                     Top Categories Book
+                     Featured Categories
                  </h2>
              </div>
              <div class="array-button">
@@ -17,22 +17,29 @@
              </div>
              <div class="swiper book-catagories-slider">
                  <div class="swiper-wrapper">
+
+                    @foreach ($categories as $key => $category)
+
                      <div class="swiper-slide">
                          <div class="book-catagories-items">
+
                              <div class="book-thumb">
-                                 <img src="{{ asset('newFrontend') }}/img/book-categori/01.png" alt="img" />
+                                 <img src="{{ asset('uploads/custom-images2/' . $category->image) }}" alt="img" />
                                  <div class="circle-shape">
                                      <img src="{{ asset('newFrontend') }}/img/book-categori/circle-shape.png"
                                          alt="shape-img" />
                                  </div>
                              </div>
-                             <div class="number">01</div>
+                             <div class="number">{{ $key + 1 }}</div>
                              <h3>
-                                 <a href="shop-details.html">Romance Books (80)</a>
+                                 <a href="shop-details.html">{{ $category->name }} ({{ $category->products->count() }})</a>
                              </h3>
                          </div>
                      </div>
-                     <div class="swiper-slide">
+                     @endforeach
+
+
+                    {{--  <div class="swiper-slide">
                          <div class="book-catagories-items">
                              <div class="book-thumb">
                                  <img src="{{ asset('newFrontend') }}/img/book-categori/02.png" alt="img" />
@@ -91,7 +98,7 @@
                                  <a href="shop-details.html">Adventure book (4)</a>
                              </h3>
                          </div>
-                     </div>
+                     </div> --}}
                  </div>
              </div>
          </div>

@@ -1,8 +1,9 @@
 <div class="swiper-slide">
     <div class="shop-box-items style-2">
         <div class="book-thumb center">
-            <a href="shop-details"><img src="{{ asset('uploads/custom-images2/' . $product->thumb_image) }}"
-                    alt="img" /></a>
+            <a href="{{ route('front.product.show', [$product->id]) }}" title="{{ $product->name }}">
+                <img src="{{ asset('uploads/custom-images2/' . $product->thumb_image) }}" alt="img"/>
+            </a>
 
 
             @if (!empty($product->offer_price))

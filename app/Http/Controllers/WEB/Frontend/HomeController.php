@@ -108,14 +108,15 @@ class HomeController extends Controller
         $firstColumns  = FooterLink::where('column', 1)->get();
         $secondColumns = FooterLink::where('column', 2)->get();
         $thirdColumns  = FooterLink::where('column', 3)->get();
-
+        $categories = Category::with("products")->orderBy('name')->get();
+        // dd($categories);
         $title  = Footer::first();
         $brands = Brand::where('status', 1)->get();
 
         $cart = session()->get('cart', []);
 
         $newPublished = Product::latest()->get();
-
+    // return $categories;
         // return view('frontend.home.index', compact(
         return view('newFrontend.pages.index', compact(
             'slider',
@@ -149,6 +150,7 @@ class HomeController extends Controller
             'offer',
             'ebook_list',
             'newPublished',     // new
+            'categories',
         ));
     }
 

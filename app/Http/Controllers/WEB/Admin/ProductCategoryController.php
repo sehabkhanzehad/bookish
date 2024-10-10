@@ -74,7 +74,7 @@ class ProductCategoryController extends Controller
 
             // For Main Image
             $destation_path = 'uploads/custom-images2/'.$image_name;
-            $image->resize(48,48);
+            // $image->resize(104,144);
             $image->save(public_path().'/'.$destation_path);
             //$product->thumb_image=$image_name;
           	$category->image = $image_name;
@@ -150,7 +150,8 @@ class ProductCategoryController extends Controller
             $image->save(public_path().'/'.$destation_path1);
 
             $destation_path2 = 'uploads/custom-images2/'.$image_name;
-            $image->resize(48,48);
+            // $image->resize(48,48);
+            $image->resize(104,144);
             $image->save(public_path().'/'.$destation_path2);
 
             $category->image=$image_name;
@@ -162,24 +163,24 @@ class ProductCategoryController extends Controller
         }
 
         if($request->banner_image){
-            
+
             $existing_banner_image = $category->banner_image;
-            
+
             $extention = $request->banner_image->getClientOriginalExtension();
             $category_banner_image = 'category'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-            
+
             $banner_image_large = 'uploads/banner_images_large/'.$category_banner_image;
             $image = Image::make($request->banner_image);
             $image->resize(1320,265);
             $image->save(public_path().'/'.$banner_image_large);
-            
+
             $banner_image_small = 'uploads/banner_images_small/'.$category_banner_image;
             $image = Image::make($request->banner_image);
             $image->resize(800,400);
             $image->save(public_path().'/'.$banner_image_small);
-           
+
             $category->banner_image = $category_banner_image;
-            
+
                 if($existing_banner_image){
                 if(File::exists(public_path().'/'.$existing_banner_image))unlink(public_path().'/'.$existing_banner_image);
             }

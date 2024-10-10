@@ -38,6 +38,7 @@ function featuredCategories()
     return $feateuredCategories;
 }
 
+
 function popularCategories()
 {
     $popularCategories = PopularCategory::with('category')->orderBy('serial', 'DESC')->get();

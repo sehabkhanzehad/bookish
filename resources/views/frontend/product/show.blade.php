@@ -5,17 +5,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <section>
         <style>
-        
-                .full-description {
-                        display: none;
-                    }
-                .description-content {
-                        display: none;
-                    }
-                    /* Display the full description when the show-full-description class is applied */
-                    .show-full-description {
-                        display: block;
-                    }
+            .full-description {
+                display: none;
+            }
+
+            .description-content {
+                display: none;
+            }
+
+            /* Display the full description when the show-full-description class is applied */
+            .show-full-description {
+                display: block;
+            }
         </style>
         <div class="container mt-3">
             <div class="row bg-white p-lg-4 p-3">
@@ -27,48 +28,51 @@
                     <div class="col-lg-8 col-md-8 col-12 ps-lg-3">
                         <h5 class="product-title">{{ $product->name }}</h5>
                         <div class="text-lg-start text center">
-                            
+
                             <table class="table table-bordered product_table">
                                 @if ($product->writer)
-                                <tr>
-                                    <td style="width: 50%;background: #EEEEEE">
-                                         <span class="text-secondary">লেখক : </span> 
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('front.shop') }}?writer={{ $product->writer_id }}" class="text-danger text-decoration-none">
-                                            {{ $product->writer->name }}
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 50%;background: #EEEEEE">
+                                            <span class="text-secondary">লেখক : </span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('front.shop') }}?writer={{ $product->writer_id }}"
+                                                class="text-danger text-decoration-none">
+                                                {{ $product->writer->name }}
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endif
-                                
+
                                 @if ($product->publication)
-                                <tr>
-                                    <td style="width: 50%;background: #EEEEEE">
-                                         <span class="text-secondary">প্রকাশনী : </span> 
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('front.shop') }}?publication={{ $product->publication_id }}" class="text-danger text-decoration-none">
-                                            {{ $product->publication->title }}
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 50%;background: #EEEEEE">
+                                            <span class="text-secondary">প্রকাশনী : </span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('front.shop') }}?publication={{ $product->publication_id }}"
+                                                class="text-danger text-decoration-none">
+                                                {{ $product->publication->title }}
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endif
-                                
+
                                 @if ($product->subject)
-                                <tr>
-                                    <td style="width: 50%;background: #EEEEEE">
-                                         <span class="text-secondary">বিষয় : </span> 
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('front.shop') }}?subject={{ $product->subject_id }}" class="text-danger text-decoration-none">
-                                            {{ $product->subject->title }}
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td style="width: 50%;background: #EEEEEE">
+                                            <span class="text-secondary">বিষয় : </span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('front.shop') }}?subject={{ $product->subject_id }}"
+                                                class="text-danger text-decoration-none">
+                                                {{ $product->subject->title }}
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endif
                             </table>
-                            
+
                             <div>
                                 <small class="text-secondary">
                                     {!! $product->short_description !!}
@@ -181,26 +185,30 @@
                                 </a>
                                 <a data-id="{{ $product->id }}"
                                     style="background: #F85606 !important;color: #ffffff; margin-top: 2%"
-                                    data-url="{{ route('front.cart.store') }}" class="btn btn-default add-to-cart bold font-20 px-lg-4 px-2 py-lg-3 py-1 add_cart col-md-12 col-lg-12 d-none">
-                                   <i class="fas fa-shopping-cart"></i> &ensp; {{ BanglaText('cart_add') }}
-                                    </a>
+                                    data-url="{{ route('front.cart.store') }}"
+                                    class="btn btn-default add-to-cart bold font-20 px-lg-4 px-2 py-lg-3 py-1 add_cart col-md-12 col-lg-12 d-none">
+                                    <i class="fas fa-shopping-cart"></i> &ensp; {{ BanglaText('cart_add') }}
+                                </a>
                                 @if ($product->read_file)
-                                    <button class="btn btn-warning me-3 mb-2 px-lg-4 px-2 py-lg-3 py-1 font-15" data-bs-toggle="modal" data-bs-target="#read_more">
+                                    <button class="btn btn-warning me-3 mb-2 px-lg-4 px-2 py-lg-3 py-1 font-15"
+                                        data-bs-toggle="modal" data-bs-target="#read_more">
                                         একটু পড়ে দেখুন
                                     </button>
                                 @endif
                             </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="read_more" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- Modal -->
+                            <div class="modal fade" id="read_more" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">PDF Pages</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <ul id="pdfImagesList" class="list-unstyled">
-                                                @foreach($product->pdf_images as $file)
+                                                @foreach ($product->pdf_images as $file)
                                                     <li>
                                                         <img src="{{ asset($file->image) }}">
                                                     </li>
@@ -211,7 +219,7 @@
                                 </div>
                             </div>
                             <style>
-                                #pdfImagesList > li > img{
+                                #pdfImagesList>li>img {
                                     width: 100%;
                                 }
                             </style>
@@ -232,10 +240,10 @@
                             </div>
                             <div class="mt-3">
                                 @auth
-                                <a href="#" class="text-danger text-decoration-none review_submit_show">
-                                    <i class="fa fa-edit"></i>
-                                    আপনার রিভিউটি লিখুন
-                                </a>
+                                    <a href="#" class="text-danger text-decoration-none review_submit_show">
+                                        <i class="fa fa-edit"></i>
+                                        আপনার রিভিউটি লিখুন
+                                    </a>
                                 @else
                                     <a href="{{ url('login-user') }}" class="text-danger text-decoration-none">
                                         <i class="fa fa-edit"></i>
@@ -246,65 +254,67 @@
                         </div>
                     </div>
                     @auth
-                    <div class="col-lg-12">
-                        <form action="{{ route('front.product.product-reviews.store') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            <div class="review_box d-none">
-                                <h5 class="bold-7">রিভিউ এবং রেটিং</h5>
-                                <p class="font-12 text-danger">
-                                    আপনিই প্রথম মতামত দিন -
-                                </p>
-                                <p class="font-12 text-secondary">
-                                    Your email address will not be published. Required fields are marked <span
-                                        class="text-danger">*</span>
-                                </p>
-                                <p class="font-12 text-secondary">
-                                    Your rating
-                                </p>
+                        <div class="col-lg-12">
+                            <form action="{{ route('front.product.product-reviews.store') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <div class="review_box d-none">
+                                    <h5 class="bold-7">রিভিউ এবং রেটিং</h5>
+                                    <p class="font-12 text-danger">
+                                        আপনিই প্রথম মতামত দিন -
+                                    </p>
+                                    <p class="font-12 text-secondary">
+                                        Your email address will not be published. Required fields are marked <span
+                                            class="text-danger">*</span>
+                                    </p>
+                                    <p class="font-12 text-secondary">
+                                        Your rating
+                                    </p>
 
-                                <div class="rating-widget">
-                                    <div class='rating-stars text-center'>
-                                        <ul id='stars'>
-                                            <li class='star' title='Poor' data-value='1'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Fair' data-value='2'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Good' data-value='3'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Excellent' data-value='4'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='WOW!!!' data-value='5'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <input type="hidden" id="ratingValue" name="rating">
-                                </div>
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <label for="">Your review *</label>
-                                        <textarea class="form-control shadow-none rounded-0" name="review" id="" rows="3"></textarea>
-                                    </div>
-                                    <div class="mb-3 col-lg-6 col-12">
-                                        <label for="">Name *</label>
-                                        <input type="text" value="{{ auth()->user()->name }}" class="form-control rounded-0 shadow-none">
-                                    </div>
-                                    <div class="mb-3 col-lg-6 col-12">
-                                        <label for="">Email *</label>
-                                        <input type="text" value="{{ auth()->user()->email }}" class="form-control rounded-0 shadow-none">
+                                    <div class="rating-widget">
+                                        <div class='rating-stars text-center'>
+                                            <ul id='stars'>
+                                                <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Good' data-value='3'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" id="ratingValue" name="rating">
                                     </div>
                                     <div class="mb-3">
-                                        <button class="btn btn-danger rounded-0" type="submit">সাবমিট</button>
+                                        <div class="mb-3">
+                                            <label for="">Your review *</label>
+                                            <textarea class="form-control shadow-none rounded-0" name="review" id="" rows="3"></textarea>
+                                        </div>
+                                        <div class="mb-3 col-lg-6 col-12">
+                                            <label for="">Name *</label>
+                                            <input type="text" value="{{ auth()->user()->name }}"
+                                                class="form-control rounded-0 shadow-none">
+                                        </div>
+                                        <div class="mb-3 col-lg-6 col-12">
+                                            <label for="">Email *</label>
+                                            <input type="text" value="{{ auth()->user()->email }}"
+                                                class="form-control rounded-0 shadow-none">
+                                        </div>
+                                        <div class="mb-3">
+                                            <button class="btn btn-danger rounded-0" type="submit">সাবমিট</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     @endauth
                 </div>
                 <div class="col-lg-3 col-md-3 col-12">
@@ -326,9 +336,8 @@
                                                 {{ $item->writer->name }}</p>
                                         @endif
                                         @if ($item->offer_price)
-                                            <p class="m-0 p-0 p-price"><del
-                                                    class="text-muted">₹{{ $item->offer_price }} </del><span
-                                                    class="ps-2 text-danger">₹{{ $item->price }}</span></p>
+                                            <p class="m-0 p-0 p-price"><del class="text-muted">₹{{ $item->offer_price }}
+                                                </del><span class="ps-2 text-danger">₹{{ $item->price }}</span></p>
                                         @else
                                             <p class="m-0 p-0 p-price"><span
                                                     class="ps-2 text-danger">₹{{ $item->price }}</span></p>
@@ -342,19 +351,18 @@
             </div>
         </div>
     </section>
-    
-    
+
+
     <div class="fixed_bottom">
         <div class="row">
             <div class="col text-center">
-                
-                <a href="{{ route('front.check.single', ['product_id' => $product->id]) }}"
-                                    style="width: 80%;"
-                                    class="btn btn-danger me-lg-3 me-1 mb-2 px-lg-4 px-2 py-lg-3 py-1 font-15 buy-now"
-                                    data-url="{{ route('front.cart.store') }}">
-                                    {{ BanglaText('order') }}
-                                </a>
-                
+
+                <a href="{{ route('front.check.single', ['product_id' => $product->id]) }}" style="width: 80%;"
+                    class="btn btn-danger me-lg-3 me-1 mb-2 px-lg-4 px-2 py-lg-3 py-1 font-15 buy-now"
+                    data-url="{{ route('front.cart.store') }}">
+                    {{ BanglaText('order') }}
+                </a>
+
                 <!--<a class="" href="{{ route('front.home') }}">-->
                 <!--    <div class="text-center">-->
                 <!--        <div class="col-12 primary">-->
@@ -365,10 +373,11 @@
             </div>
             <div class="col text-center">
                 @if ($product->read_file)
-                                    <button style="width: 80%;" class="btn btn-warning me-3 mb-2 px-lg-4 px-2 py-lg-3 py-1 font-15" data-bs-toggle="modal" data-bs-target="#read_more">
-                                        একটু পড়ে দেখুন
-                                    </button>
-                                @endif
+                    <button style="width: 80%;" class="btn btn-warning me-3 mb-2 px-lg-4 px-2 py-lg-3 py-1 font-15"
+                        data-bs-toggle="modal" data-bs-target="#read_more">
+                        একটু পড়ে দেখুন
+                    </button>
+                @endif
                 <!--<a class="toggler">-->
                 <!--    <div class="text-center">-->
                 <!--        <div class="col-12 primary">-->
@@ -378,15 +387,14 @@
                 <!--</a>-->
             </div>
         </div>
-      </div>
-    
-    
-    
+    </div>
+
+
+
 
 @endsection
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.description-show .read-more').click(function(e) {
@@ -473,7 +481,6 @@
         });
     </script>
     <script>
-
         $(document).ready(function() {
             $('.increase-qty').on('click', function() {
                 var qtyInput = $(this).siblings('.qty');
@@ -728,22 +735,24 @@
 
             }
         });
-        
-        $(document).on('click','button.readMores',function(){
-            let id=$(this).data('id');
+
+        $(document).on('click', 'button.readMores', function() {
+            let id = $(this).data('id');
             $.ajax({
                 url: "{{ route('front.readPdf') }}",
                 method: 'GET',
-                data:{id},
-                success:function(res){
-                    if(res.success) {
+                data: {
+                    id
+                },
+                success: function(res) {
+                    if (res.success) {
                         $('div#read_more').html(res.html).modal('show');
                     }
                 }
-            }); 
+            });
         });
-      
-       document.getElementById('convertPdfButton').addEventListener('click', function () {
+
+        document.getElementById('convertPdfButton').addEventListener('click', function() {
             const pdfUrl = '{{ asset($product->read_file) }}';
             // Load the PDF
             pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
@@ -754,7 +763,9 @@
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     pdf.getPage(pageNum).then(page => {
                         const scale = 2.5;
-                        const viewport = page.getViewport({ scale });
+                        const viewport = page.getViewport({
+                            scale
+                        });
                         const canvas = document.createElement('canvas');
                         const context = canvas.getContext('2d');
                         canvas.height = viewport.height;
@@ -792,6 +803,5 @@
             // Update the source of the big image with the new image source
             bigImage.src = newImageSrc;
         }
-
     </script>
 @endpush
