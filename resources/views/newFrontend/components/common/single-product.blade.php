@@ -30,14 +30,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="shop-details.html"><i class="far fa-eye"></i></a>
+                    <a href="{{ route('front.product.show', [$product->id]) }}"><i class="far fa-eye"></i></a>
                 </li>
             </ul>
         </div>
         <div class="shop-content">
             <h5>Design Low Book</h5>
             <h3>
-                <a href="shop-details.html">{{ $product->name }}</a>
+                <a href="{{ route('front.product.show', [$product->id]) }}">{{ $product->name }}</a>
             </h3>
 
             @if ($product->offer_price)
@@ -74,7 +74,7 @@
             </ul>
         </div>
         <div class="shop-button">
-            <a href="shop-details.html" class="theme-btn"><i class="fa-solid fa-basket-shopping"></i>
+            <a href="{{ route('front.product.show', [$product->id]) }}" class="theme-btn"><i class="fa-solid fa-basket-shopping"></i>
                 Add To Cart</a>
         </div>
     </div>

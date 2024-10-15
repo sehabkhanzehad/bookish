@@ -1,39 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--<< Header Area >>-->
-
-<head>
-    <!-- ========== Meta Tags ========== -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="gramentheme" />
-    <meta name="description" content="Bookish - Book Store E-Commerce" />
-    <!-- ======== Page title ============ -->
-    <title>Bookish - Home</title>
-    <!--<< Favcion >>-->
-    <link rel="shortcut icon" href="{{ asset('newFrontend') }}/img/favicon.png" />
-    <!--<< Bootstrap min.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/bootstrap.min.css" />
-    <!--<< All Min Css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/all.min.css" />
-    <!--<< Animate.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/animate.css" />
-    <!--<< Magnific Popup.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/magnific-popup.css" />
-    <!--<< MeanMenu.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/meanmenu.css" />
-    <!--<< Swiper Bundle.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/swiper-bundle.min.css" />
-    <!--<< Nice Select.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/nice-select.css" />
-    <!--<< Icomoon.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/icomoon.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icomoon@1.0.0/style.min.css" />
-    <!--<< Main.css >>-->
-    <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/main.css" />
-</head>
+@include('newFrontend.layouts.head')
 
 <body>
     <!-- Cursor follower -->
@@ -91,6 +59,10 @@
         <i class="fa-solid fa-chevron-up"></i>
     </button>
 
+    @php
+        $footer = DB::table('footers')->first();
+    @endphp
+
     <!-- Offcanvas Area start  -->
     <div class="fix-area">
         <div class="offcanvas__info">
@@ -98,7 +70,7 @@
                 <div class="offcanvas__content">
                     <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
                         <div class="offcanvas__logo">
-                            <a href="{{ route("front.home") }}">
+                            <a href="{{ route('front.home') }}">
                                 <img src="{{ asset('newFrontend') }}/img/logo/black-logo.svg" alt="logo-img" />
                             </a>
                         </div>
@@ -176,25 +148,22 @@
             <div class="header-top-wrapper">
                 <ul class="contact-list">
                     <li>
-                        <i class="fa-regular fa-phone"></i>
-                        <a href="tel:+20866660112">+208-6666-0112</a>
+                        <span>Phone: </span>
+                        <a href="tel:{{ $footer->phone }}">{{ $footer->phone }}</a>
                     </li>
                     <li>
-                        <i class="far fa-envelope"></i>
-                        <a href="mailto:info@example.com">info@example.com</a>
+                        <span>Email:</span>
+                        <a href="mailto:{{ $footer->email }}">{{ $footer->email }}</a>
                     </li>
                     <li>
-                        <i class="far fa-clock"></i>
-                        <span>Sunday - Fri: 9 aM - 6 pM</span>
+                        <a class="d-none" href=""></a>
                     </li>
                 </ul>
                 <ul class="list">
                     <li>
-                        <i class="fa-light fa-comments"></i><a href="contact.html">Live Chat</a>
-                    </li>
-                    <li>
-                        <i class="fa-light fa-user"></i>
-                        <button data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <button type="button" class="theme-btn"
+                            style="border: 2px solid white; padding: 10px !important;" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">
                             Login
                         </button>
                     </li>
@@ -212,7 +181,7 @@
                         <div class="col-6 col-md-6 col-lg-10 col-xl-8 col-xxl-10">
                             <div class="header-left">
                                 <div class="logo">
-                                    <a href="{{ route("front.home") }}" class="header-logo">
+                                    <a href="{{ route('front.home') }}" class="header-logo">
                                         <img src="{{ asset('newFrontend') }}/img/logo/white-logo.svg"
                                             alt="logo-img" />
                                     </a>
@@ -222,18 +191,9 @@
                                         <nav>
                                             <ul>
                                                 <li>
-                                                    <a href="{{ route("front.home") }}">
+                                                    <a href="{{ route('front.home') }}">
                                                         Home
-                                                        {{-- <i class="fas fa-angle-down"></i> --}}
                                                     </a>
-                                                    {{-- <ul class="submenu">
-                                                        <li>
-                                                            <a href="index.html">Home 01</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index-2.html">Home 02</a>
-                                                        </li>
-                                                    </ul> --}}
                                                 </li>
                                                 <li>
                                                     <a href="shop.html">
@@ -389,7 +349,7 @@
                         <div class="col-6 col-md-6 col-lg-10 col-xl-8 col-xxl-10">
                             <div class="header-left">
                                 <div class="logo">
-                                    <a href="{{ route("front.home") }}" class="header-logo">
+                                    <a href="{{ route('front.home') }}" class="header-logo">
                                         <img src="{{ asset('newFrontend') }}/img/logo/white-logo.svg"
                                             alt="logo-img" />
                                     </a>
@@ -399,7 +359,7 @@
                                         <nav id="mobile-menu">
                                             <ul>
                                                 <li>
-                                                    <a href="{{ route("front.home") }}">
+                                                    <a href="{{ route('front.home') }}">
                                                         Home
                                                         {{-- <i class="fas fa-angle-down"></i> --}}
                                                     </a>
@@ -579,47 +539,18 @@
                                     <label for="saveForNext">Remember me</label>
                                 </div>
                                 <div class="text">
-                                    <a href="index-2.html">Forgot Your password?</a>
+                                    <a href="">Forgot Your password?</a>
                                 </div>
                             </div>
                             <div class="loginBtn">
-                                <a href="index-2.html" class="theme-btn rounded-0">
+                                <a href="" class="theme-btn rounded-0">
                                     Log in
                                 </a>
-                            </div>
-                            <div class="orting-badge">Or</div>
-                            <div>
-                                <a class="another-option" href="https://www.google.com/">
-                                    <img src="{{ asset('newFrontend') }}/img/google.png" alt="google" />
-                                    Continue With Google
+                                <br>
+                                <a class="" style="display: block; text-align: center; !important"
+                                    type="button"data-bs-toggle="modal" data-bs-target="#registrationModal">
+                                    Create an account!
                                 </a>
-                            </div>
-                            <div>
-                                <a class="another-option another-option-two" href="https://www.facebook.com/">
-                                    <img src="{{ asset('newFrontend') }}/img/facebook.png" alt="google" />
-                                    Continue With Facebook
-                                </a>
-                            </div>
-
-                            <div class="form-check-3 d-flex align-items-center from-customradio-2 mt-3">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" />
-                                <label class="form-check-label">
-                                    I Accept Your Terms & Conditions
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="banner">
-                            <button type="button" class="rounded-0 login-btn" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">
-                                Log in
-                            </button>
-                            <button type="button" class="theme-btn rounded-0 register-btn" data-bs-toggle="modal"
-                                data-bs-target="#registrationModal">
-                                Create Account
-                            </button>
-                            <div class="loginBg">
-                                <img src="{{ asset('newFrontend') }}/img/signUpbg.jpg" alt="signUpBg" />
                             </div>
                         </div>
                     </div>
@@ -641,62 +572,20 @@
                     <div class="identityBox">
                         <div class="form-wrapper">
                             <h1 id="registrationModalLabel">
-                                Create account!
+                                Create an account!
                             </h1>
                             <input class="inputField" type="text" name="name" id="name"
-                                placeholder="User Name" />
-                            <input class="inputField" type="email" name="email" placeholder="Email Address" />
+                                placeholder="Name" />
+                            <input class="inputField" type="text" name="phone" placeholder="+8801XXXXXXXXX" />
+                            <input class="inputField" type="email" name="email" placeholder="xyz@example.com" />
+
                             <input class="inputField" type="password" name="password"
                                 placeholder="Enter Password" />
                             <input class="inputField" type="password" name="password"
                                 placeholder="Enter Confirm Password" />
-                            <div class="input-check remember-me">
-                                <div class="checkbox-wrapper">
-                                    <input type="checkbox" class="form-check-input" name="save-for-next"
-                                        id="rememberMe" />
-                                    <label for="rememberMe">Remember me</label>
-                                </div>
-                                <div class="text">
-                                    <a href="index-2.html">Forgot Your password?</a>
-                                </div>
-                            </div>
-                            <div class="loginBtn">
-                                <a href="index-2.html" class="theme-btn rounded-0">
-                                    Log in
-                                </a>
-                            </div>
-                            <div class="orting-badge">Or</div>
-                            <div>
-                                <a class="another-option" href="https://www.google.com/">
-                                    <img src="{{ asset('newFrontend') }}/img/google.png" alt="google" />
-                                    Continue With Google
-                                </a>
-                            </div>
-                            <div>
-                                <a class="another-option another-option-two" href="https://www.facebook.com/">
-                                    <img src="{{ asset('newFrontend') }}/img/facebook.png" alt="google" />
-                                    Continue With Facebook
-                                </a>
-                            </div>
-                            <div class="form-check-3 d-flex align-items-center from-customradio-2 mt-3">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" />
-                                <label class="form-check-label">
-                                    I Accept Your Terms & Conditions
-                                </label>
-                            </div>
-                        </div>
 
-                        <div class="banner">
-                            <button type="button" class="rounded-0 login-btn" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">
-                                Log in
-                            </button>
-                            <button type="button" class="theme-btn rounded-0 register-btn" data-bs-toggle="modal"
-                                data-bs-target="#registrationModal">
-                                Create Account
-                            </button>
-                            <div class="signUpBg">
-                                <img src="{{ asset('newFrontend') }}/img/registrationbg.jpg" alt="signUpBg" />
+                            <div style="margin-top: 20px !important" class="loginBtn">
+                                <a href="" class="theme-btn rounded-0">Create</a>
                             </div>
                         </div>
                     </div>
@@ -705,203 +594,13 @@
         </div>
     </div>
 
-    @yield("content")
+    @yield('content')
     <!-- Footer Section start  -->
-    <footer class="footer-section footer-bg">
-        <div class="container">
-            <div class="contact-info-area">
-                <div class="contact-info-items wow fadeInUp" data-wow-delay=".2s">
-                    <div class="icon">
-                        <i class="icon-icon-5"></i>
-                    </div>
-                    <div class="content">
-                        <p>Call Us 7/24</p>
-                        <h3>
-                            <a href="tel:+2085550112">+208-555-0112</a>
-                        </h3>
-                    </div>
-                </div>
-                <div class="contact-info-items wow fadeInUp" data-wow-delay=".4s">
-                    <div class="icon">
-                        <i class="icon-icon-6"></i>
-                    </div>
-                    <div class="content">
-                        <p>Make a Quote</p>
-                        <h3>
-                            <a href="mailto:example@gmail.com">example@gmail.com</a>
-                        </h3>
-                    </div>
-                </div>
-                <div class="contact-info-items wow fadeInUp" data-wow-delay=".6s">
-                    <div class="icon">
-                        <i class="icon-icon-7"></i>
-                    </div>
-                    <div class="content">
-                        <p>Opening Hour</p>
-                        <h3>Sunday - Fri: 9 aM - 6 pM</h3>
-                    </div>
-                </div>
-                <div class="contact-info-items wow fadeInUp" data-wow-delay=".8s">
-                    <div class="icon">
-                        <i class="icon-icon-8"></i>
-                    </div>
-                    <div class="content">
-                        <p>Location</p>
-                        <h3>4517 Washington ave.</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-widgets-wrapper">
-            <div class="plane-shape float-bob-y">
-                <img src="{{ asset('newFrontend') }}/img/plane-shape.png" alt="img" />
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                        <div class="single-footer-widget">
-                            <div class="widget-head">
-                                <a href="{{ route("front.home") }}">
-                                    <img src="{{ asset('newFrontend') }}/img/logo/white-logo.svg"
-                                        alt="logo-img" />
-                                </a>
-                            </div>
-                            <div class="footer-content">
-                                <p>
-                                    Phasellus ultricies aliquam volutpat
-                                    ullamcorper laoreet neque, a lacinia
-                                    curabitur lacinia mollis
-                                </p>
-                                <div class="social-icon d-flex align-items-center">
-                                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-                                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".4s">
-                        <div class="single-footer-widget">
-                            <div class="widget-head">
-                                <h3>Costumers Support</h3>
-                            </div>
-                            <ul class="list-area">
-                                <li>
-                                    <a href="shop.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Store List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Opening Hours
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Return Policy
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5 wow fadeInUp" data-wow-delay=".6s">
-                        <div class="single-footer-widget">
-                            <div class="widget-head">
-                                <h3>Categories</h3>
-                            </div>
-                            <ul class="list-area">
-                                <li>
-                                    <a href="shop.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Novel Books
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shop.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Poetry Books
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        Political Books
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">
-                                        <i class="fa-solid fa-chevrons-right"></i>
-                                        History Books
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                        <div class="single-footer-widget">
-                            <div class="widget-head">
-                                <h3>Newsletter</h3>
-                            </div>
-                            <div class="footer-content">
-                                <p>
-                                    Sign up to searing weekly newsletter to
-                                    get the latest updates.
-                                </p>
-                                <div class="footer-input">
-                                    <input type="email" id="email2" placeholder="Enter Email Address" />
-                                    <button class="newsletter-btn" type="submit">
-                                        <i class="fa-regular fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-wrapper d-flex align-items-center justify-content-between">
-                    <p class="wow fadeInLeft" data-wow-delay=".3s">
-                        © All Copyright 2024 by
-                        <a href="index.html">Bookle</a>
-                    </p>
-                    <ul class="brand-logo wow fadeInRight" data-wow-delay=".5s">
-                        <li>
-                            <a href="contact.html">
-                                <img src="{{ asset('newFrontend') }}/img/visa-logo.png" alt="img" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="contact.html">
-                                <img src="{{ asset('newFrontend') }}/img/mastercard.png" alt="img" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="contact.html">
-                                <img src="{{ asset('newFrontend') }}/img/payoneer.png" alt="img" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="contact.html">
-                                <img src="{{ asset('newFrontend') }}/img/affirm.png" alt="img" />
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('newFrontend.components.layout.footer')
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
         integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

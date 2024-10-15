@@ -32,7 +32,7 @@
                              </div>
                              <div class="number">{{ $key + 1 }}</div>
                              <h3>
-                                 <a href="shop-details.html">{{ $category->name }} ({{ $category->products->count() }})</a>
+                                 <a href="{{ route('front.shop') }}?category={{ $category->id }}">{{ $category->name }} ({{ $category->products->count() }})</a>
                              </h3>
                          </div>
                      </div>

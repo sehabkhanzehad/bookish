@@ -80,6 +80,7 @@ class ProductController extends Controller
         // dd($product);
         // frontend.product.show
         return view('newFrontend.pages.product-details', compact('product', 'firstColumns', 'secondColumns', 'thirdColumns', 'title', 'Specification', 'relatedProducts', 'reviews'));
+        // return $reviews;
     }
 
 
