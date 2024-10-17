@@ -5,7 +5,9 @@ namespace App\Http\Controllers\WEB\Frontend\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Auth, Hash, Image, File, Str;
+use Hash, Image, File, Str;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
@@ -237,28 +239,71 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'login' => ['required'], // Assuming 'login' can be either email or phone
-            'password' => ['required'],
-        ]);
+        // $credentials = $request->validate([
+        //     'login' => ['required'], // Assuming 'login' can be either email or phone
+        //     'password' => ['required'],
+        // ]);
 
-        $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+        // $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
 
-        if (str_contains($request->login, '@')) {
-            $result = User::where('email', $request->login)->first();
-        } else {
-            $result = User::where('phone', $request->login)->first();
-        }
+        // if (str_contains($request->login, '@')) {
+        //     $result = User::where('email', $request->login)->first();
+        // } else {
+        //     $result = User::where('phone', $request->login)->first();
+        // }
 
-        if (Auth::attempt([$loginField => $request->login, 'password' => $request->password], $request->get('remember'))) {
+        // if (Auth::attempt([$loginField => $request->login, 'password' => $request->password], $request->get('remember'))) {
 
-            if ($result->email == 'admin24@gmail.com') {
-                return redirect('/admin/dashboard');
-            } else {
-                return redirect()->route('front.profile');
+        //     if ($result->email == 'admin24@gmail.com') {
+        //         // return redirect('/admin/dashboard');
+        //         return response()->json([
+        //             'status' => 'success',
+        //             'message' => 'Login Success',
+        //             'url' =>  route("admin.dashboard"),
+        //         ]);
+        //     } else {
+        //         // return redirect()->route('front.profile');
+        //         return response()->json([
+        //             'status' => 'success',
+        //             'message' => 'Login Success',
+        //             'url' =>  route("front.profile"),
+        //         ]);
+        //     }
+        // }
+        // return back()->with('error', 'Credential error');
+
+        try {
+            $email = $request->input('email');
+            $password = $request->input('password');
+
+            if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => 2])) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login Success',
+                    'url' =>  route("admin.dashboard"),
+                ]);
             }
+
+
+            if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Login Success',
+                    'data' => Auth::user(),
+                    'url' => route('front.home')
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid Email or Password'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong'
+            ]);
         }
-        return back()->with('error', 'Credential error');
     }
 
     public function regpage()

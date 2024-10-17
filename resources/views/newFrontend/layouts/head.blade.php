@@ -30,4 +30,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icomoon@1.0.0/style.min.css" />
     <!--<< Main.css >>-->
     <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/main.css" />
+
+     <!-- include css -->
+     <link rel="stylesheet" href="{{ asset('newFrontend/css/include/progress.css') }}">
+     <link rel="stylesheet" href="{{ asset('newFrontend/css/include/toastify.min.css') }}">
 </head>

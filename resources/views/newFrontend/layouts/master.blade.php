@@ -4,6 +4,13 @@
 @include('newFrontend.layouts.head')
 
 <body>
+    <!-- progress bar -->
+    <div id="loader" class="LoadingOverlay d-none">
+        <div class="Line-Progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+
     <!-- Cursor follower -->
     <div class="cursor-follower"></div>
 
@@ -159,7 +166,10 @@
                         <a class="d-none" href=""></a>
                     </li>
                 </ul>
-                <ul class="list">
+                <ul class="list main-menu">
+                    @if (Auth::check())
+                      <li><button style="border: 2px solid white; padding: 2px 10px; border-radius: 0px 10px 0px 10px;">{{ Auth::user()->name }} <i class="fas fa-angle-down"></i></button></li>
+                    @else
                     <li>
                         <button type="button" class="theme-btn"
                             style="border: 2px solid white; padding: 10px !important;" data-bs-toggle="modal"
@@ -167,6 +177,7 @@
                             Login
                         </button>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -529,8 +540,9 @@
                     <div class="identityBox">
                         <div class="form-wrapper">
                             <h1 id="loginModalLabel">welcome back!</h1>
-                            <input class="inputField" type="email" name="email" placeholder="Email Address" />
-                            <input class="inputField" type="password" name="password"
+                            <input class="inputField" id ="loginEmail" type="email" name="email"
+                                placeholder="Email Address" />
+                            <input class="inputField" id ="loginPassword" type="password" name="password"
                                 placeholder="Enter Password" />
                             <div class="input-check remember-me">
                                 <div class="checkbox-wrapper">
@@ -543,7 +555,7 @@
                                 </div>
                             </div>
                             <div class="loginBtn">
-                                <a href="" class="theme-btn rounded-0">
+                                <a onclick="login()" type="button" class="theme-btn rounded-0">
                                     Log in
                                 </a>
                                 <br>
@@ -601,9 +613,12 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
-        integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('newFrontend/js/include/config.js') }}"></script>
+    <script src="{{ asset('newFrontend/js/include/axios.min.js') }}"></script>
+    <script src="{{ asset('newFrontend/js/include/toastify-js.js') }}"></script>
+    <script src="{{ asset('newFrontend/js/include/custom.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+
     <!--<< All JS Plugins >>-->
     <script src="{{ asset('newFrontend') }}/js/jquery-3.7.1.min.js"></script>
     <!--<< Viewport Js >>-->
