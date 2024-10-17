@@ -328,7 +328,7 @@
                             <div class="review-items">
                                 @foreach ($reviews as $review)
 
-                                @endforeach
+
                                 <div class="review-wrap-area d-flex gap-4">
                                     <div class="review-thumb">
                                         <img src="{{ asset('newFrontend') }}/img/shop-details/review.png" alt="img">
@@ -351,7 +351,7 @@
                                         <p class="mt-30 mb-4" style="text-align: justify">{{ $review->review }}</p>
                                     </div>
                                 </div>
-
+                                @endforeach
                                 <div class="review-title mt-5 py-15 mb-30">
                                     <h4>Your Rating*</h4>
                                     <div class="rate-now d-flex align-items-center">
