@@ -1,4 +1,5 @@
 @extends('frontend.app')
+{{-- @extends('newFrontend.layouts.master') --}}
 @section('title', 'Shop Product List')
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
@@ -18,7 +19,7 @@
                 </div>
             </div>
             @include('frontend.shop.side_filter')
-            
+
             <div class="col-lg-9 col-md-7 col-12 all-products-widget" id="shop_products">
 
             </div>
@@ -46,6 +47,7 @@ $(document).ready(function () {
         var category = [];
         var ebook = [];
         var sort = $(".sort-select").val();
+        
         $(".subcategory:checked").each(function () {
             subcategory.push($(this).val());
         });

@@ -14,7 +14,7 @@ use File;
 use Auth;
 class BlogController extends Controller
 {
-    
+
     public function index()
     {
         $blogs = Blog::with('category','comments')->get();
@@ -67,7 +67,8 @@ class BlogController extends Controller
             $blog->image = $image_name;
         }
 
-        $blog->admin_id = $admin->id;
+        // $blog->admin_id = $admin->id;
+        $blog->admin_id = Auth()->user()->id;
         $blog->title = $request->title;
         $blog->slug = $request->slug;
         $blog->description = $request->description;

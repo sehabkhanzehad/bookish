@@ -365,7 +365,7 @@
                     class="nav-item dropdown {{ Route::is('admin.service.*') || Route::is('admin.maintainance-mode') || Route::is('admin.announcement') || Route::is('admin.slider.*') || Route::is('admin.home-page') || Route::is('admin.banner-image.index') || Route::is('admin.homepage-one-visibility') || Route::is('admin.cart-bottom-banner') || Route::is('admin.shop-page') || Route::is('admin.seo-setup') || Route::is('admin.menu-visibility') || Route::is('admin.product-detail-page') || Route::is('admin.default-avatar') || Route::is('admin.seller-conditions') || Route::is('admin.subscription-banner') || Route::is('admin.testimonial.*') || Route::is('admin.homepage-section-title') ? 'active' : '' }}">
 
                     <p class="s-divide">{{ __('admin.Website Settings') }}</p>
-                    <!--
+
             <a href="#" class="nav-link has-dropdown">
             <div class="icon">
             <i class="fas fa-globe"></i>
@@ -374,17 +374,17 @@
             <span style="color:black">{{ __('admin.Manage Website') }}</span></a>
             <ul class="dropdown-menu">
 
-                <li class="{{ Route::is('admin.shop-page') ? 'active' : '' }} d-none"><a class="nav-link" href="{{ route('admin.shop-page') }}">{{ __('admin.Shop Page') }}</a></li>
+                {{-- <li class="{{ Route::is('admin.shop-page') ? 'active' : '' }} d-none"><a class="nav-link" href="{{ route('admin.shop-page') }}">{{ __('admin.Shop Page') }}</a></li> --}}
 
-                <li class="{{ Route::is('admin.service.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.service.index') }}">{{ __('admin.Service') }}</a></li>
+                {{-- <li class="{{ Route::is('admin.service.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.service.index') }}">{{ __('admin.Service') }}</a></li> --}}
 
-                <li class="{{ Route::is('admin.homepage-section-title') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.homepage-section-title') }}">{{ __('admin.Homepage Section Title') }}</a></li>
+                {{-- <li class="{{ Route::is('admin.homepage-section-title') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.homepage-section-title') }}">{{ __('admin.Homepage Section Title') }}</a></li>
 
-                <li class="{{ Route::is('admin.seller-conditions') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.seller-conditions') }}">{{ __('admin.Seller Conditions') }}</a></li>
+                <li class="{{ Route::is('admin.seller-conditions') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.seller-conditions') }}">{{ __('admin.Seller Conditions') }}</a></li> --}}
 
                 <li class="{{ Route::is('admin.testimonial.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.testimonial.index') }}">{{ __('admin.Testimonial') }}</a></li>
 
-                <li class="{{ Route::is('admin.maintainance-mode') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.maintainance-mode') }}">{{ __('admin.Maintainance Mode') }}</a></li>
+                {{-- <li class="{{ Route::is('admin.maintainance-mode') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.maintainance-mode') }}">{{ __('admin.Maintainance Mode') }}</a></li>
 
                 <li class="{{ Route::is('admin.announcement') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.announcement') }}">{{ __('admin.Announcement') }}</a></li>
 
@@ -392,10 +392,10 @@
 
                 <li class="{{ Route::is('admin.image-content') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.image-content') }}">{{ __('admin.Image Content') }}</a></li>
 
-                <li class="{{ Route::is('admin.default-avatar') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.default-avatar') }}">{{ __('admin.Default Avatar') }}</a></li>
+                <li class="{{ Route::is('admin.default-avatar') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.default-avatar') }}">{{ __('admin.Default Avatar') }}</a></li> --}}
 
             </ul>
-         -->
+         {{--  --}}
                 </li>
             @endif
 
@@ -492,27 +492,26 @@
 
             <!--</li>-->
 
-            <!--<li class="nav-item dropdown {{ Route::is('admin.blog-category.*') || Route::is('admin.blog.*') || Route::is('admin.popular-blog.*') || Route::is('admin.blog-comment.*') ? 'active' : '' }}">-->
+            <li class="nav-item dropdown {{ Route::is('admin.blog-category.*') || Route::is('admin.blog.*') || Route::is('admin.popular-blog.*') || Route::is('admin.blog-comment.*') ? 'active' : '' }}">
 
-            <!--  <a href="#" class="nav-link has-dropdown">-->
-            <!--  <div class="icon">-->
-            <!--  <i class="fas fa-th-large"></i>-->
-            <!--  </div>-->
-            <!--  <span style="color:black">{{ __('admin.Blogs') }}</span></a>-->
+              <a href="#" class="nav-link has-dropdown">
+              <div class="icon">
+             <i class="fas fa-th-large"></i>
+              </div>
+             <span style="color:black">{{ __('admin.Blogs') }}</span></a>
 
-            <!--  <ul class="dropdown-menu">-->
+            <ul class="dropdown-menu">
 
-            <!--      <li class="{{ Route::is('admin.blog-category.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog-category.index') }}">{{ __('admin.Categories') }}</a></li>-->
+                 <li class="{{ Route::is('admin.blog-category.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog-category.index') }}">{{ __('admin.Categories') }}</a></li>
 
-            <!--      <li class="{{ Route::is('admin.blog.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog.index') }}">{{ __('admin.Blogs') }}</a></li>-->
+                 <li class="{{ Route::is('admin.blog.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog.index') }}">{{ __('admin.Blogs') }}</a></li>
 
-            <!--      <li class="{{ Route::is('admin.popular-blog.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.popular-blog.index') }}">{{ __('admin.Popular Blogs') }}</a></li>-->
+             {{-- <li class="{{ Route::is('admin.popular-blog.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.popular-blog.index') }}">{{ __('admin.Popular Blogs') }}</a></li> --}}
 
-            <!--      <li class="{{ Route::is('admin.blog-comment.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog-comment.index') }}">{{ __('admin.Comments') }}</a></li>-->
+             <li class="{{ Route::is('admin.blog-comment.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.blog-comment.index') }}">{{ __('admin.Comments') }}</a></li>
 
-            <!--  </ul>-->
-
-            <!--</li>-->
+         </ul>
+</li>
 
 
 

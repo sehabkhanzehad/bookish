@@ -10,11 +10,11 @@
         </div>
         <div class="container">
             <div class="page-heading">
-                <h1>Shop Default</h1>
+                <h1>Shop</h1>
                 <div class="page-header">
                     <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".3s">
                         <li>
-                            <a href="index.html">
+                            <a href="{{ route('front.home') }}">
                                 Home
                             </a>
                         </li>
@@ -22,7 +22,7 @@
                             <i class="fa-solid fa-chevron-right"></i>
                         </li>
                         <li>
-                            Shop Default
+                            Shop
                         </li>
                     </ul>
                 </div>
@@ -37,9 +37,16 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="woocommerce-notices-wrapper wow fadeInUp" data-wow-delay=".3s">
-                            <p>Showing 1-3 Of 34 Results </p>
+                            <p>Filter By</p>
                             <div class="form-clt">
-                                <div class="nice-select" tabindex="0">
+                                <select class="form-control form-control-sm sort-select nice-select" name="sort" tabindex="0">
+                                    <option value="sort_by_relevancy_desc" selected="">More relevant</option>
+                                    <option value="discount_asc">Discount - Low to High</option>
+                                    <option value="discount_desc">Discount - High to Low</option>
+                                    <option value="price_asc">Price - Low to High</option>
+                                    <option value="price_desc">Price - High to Low</option>
+                                </select>
+                                {{-- <div class="nice-select" tabindex="0">
                                     <span class="current">
                                         Default Sorting
                                     </span>
@@ -57,19 +64,288 @@
                                             Sort by latest
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="icon">
+                                </div> --}}
+                                {{-- <div class="icon">
                                     <a href="shop-list.html"><i class="fas fa-list"></i></a>
                                 </div>
                                 <div class="icon-2 active">
                                     <a href="shop.html"><i class="fa-sharp fa-regular fa-grid-2"></i></a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-lg-4 order-2 order-md-1 wow fadeInUp" data-wow-delay=".3s">
                         <div class="main-sidebar">
+                            <div class="single-sidebar-widget">
+                                <button type="button"  style="text-align: left; border: 2px solid rgb(214, 207, 207); width: 100%; border-radius: 10px; padding: 10px;"
+                                    class="collapsible">Publication <i class="fa-solid fa-angle-down"></i></button>
+
+                                <div class="content mt-2" style="display: none;">
+                                    <div class="categories-list">
+                                        @foreach ($publications as $item)
+                                        <label class="checkbox-single d-flex align-items-center">
+                                            <span class="d-flex gap-xl-3 gap-2 align-items-center">
+                                                <span class="checkbox-area d-center">
+                                                    <input type="checkbox" name="publication[]"
+                                                    {{ request('publication') == $item->id ? 'checked' : '' }}
+                                                    value="{{ $item->id }}" class="me-2 publication">
+                                                    <span class="checkmark d-center"></span>
+                                                </span>
+                                                <span class="text-color">
+                                                    {{ $item->title }} ({{ count($item->products) }})
+                                                </span>
+                                            </span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-sidebar-widget">
+                                <button type="button"  style="text-align: left; border: 2px solid rgb(214, 207, 207); width: 100%; border-radius: 10px; padding: 10px;"
+                                    class="collapsible">Categories <i class="fa-solid fa-angle-down"></i></button>
+
+                                <div class="content mt-2" style="display: none;">
+                                    <div class="categories-list">
+                                        @foreach ($categories as $item)
+                                        <label class="checkbox-single d-flex align-items-center">
+                                            <span class="d-flex gap-xl-3 gap-2 align-items-center">
+                                                <span class="checkbox-area d-center">
+                                                    <input type="checkbox" name="category[]"
+                                                    {{ request('category') == $item->id ? 'checked' : '' }}
+                                                    value="{{ $item->id }}" class="me-2 category">
+                                                    <span class="checkmark d-center"></span>
+                                                </span>
+                                                <span class="text-color">
+                                                    {{ $item->name }} ({{ count($item->products) }})
+                                                </span>
+                                            </span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-sidebar-widget">
+                                <button type="button"  style="text-align: left; border: 2px solid rgb(214, 207, 207); width: 100%; border-radius: 10px; padding: 10px;"
+                                    class="collapsible">Subjects <i class="fa-solid fa-angle-down"></i></button>
+
+                                <div class="content mt-2" style="display: none;">
+                                    <div class="categories-list">
+                                        @foreach ($subjects as $item)
+                                        <label class="checkbox-single d-flex align-items-center">
+                                            <span class="d-flex gap-xl-3 gap-2 align-items-center">
+                                                <span class="checkbox-area d-center">
+                                                    <input type="checkbox" name="subject[]"
+                                                    {{ request('subject') == $item->id ? 'checked' : '' }}
+                                                    value="{{ $item->id }}" class="me-2 subject">
+                                                    <span class="checkmark d-center"></span>
+                                                </span>
+                                                <span class="text-color">
+                                                    {{ $item->title }} ({{ count($item->products) }})
+                                                </span>
+                                            </span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-sidebar-widget">
+                                <button type="button"  style="text-align: left; border: 2px solid rgb(214, 207, 207); width: 100%; border-radius: 10px; padding: 10px;"
+                                    class="collapsible">Writers <i class="fa-solid fa-angle-down"></i></button>
+
+                                <div class="content mt-2" style="display: none;">
+                                    <div class="categories-list">
+                                        @foreach ($writers as $item)
+                                        <label class="checkbox-single d-flex align-items-center">
+                                            <span class="d-flex gap-xl-3 gap-2 align-items-center">
+                                                <span class="checkbox-area d-center">
+                                                    <input type="checkbox" name="writer[]"
+                                                    {{ request('writer') == $item->id ? 'checked' : '' }}
+                                                    value="{{ $item->id }}" class="me-2 writer">
+                                                    <span class="checkmark d-center"></span>
+                                                </span>
+                                                <span class="text-color">
+                                                    {{ $item->name }} ({{ count($item->products) }})
+                                                </span>
+                                            </span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-sidebar-widget">
+                                <button type="button"  style="text-align: left; border: 2px solid rgb(214, 207, 207); width: 100%; border-radius: 10px; padding: 10px;"
+                                    class="collapsible">Packages <i class="fa-solid fa-angle-down"></i></button>
+
+                                <div class="content mt-2" style="display: none;">
+                                    <div class="categories-list">
+                                        @foreach ($packages as $item)
+                                        <label class="checkbox-single d-flex align-items-center">
+                                            <span class="d-flex gap-xl-3 gap-2 align-items-center">
+                                                <span class="checkbox-area d-center">
+                                                    <input type="checkbox" name="package[]"
+                                                    {{ request('package') == $item->id ? 'checked' : '' }}
+                                                    value="{{ $item->id }}" class="me-2 package">
+                                                    <span class="checkmark d-center"></span>
+                                                </span>
+                                                <span class="text-color">
+                                                    {{ $item->title }} ({{ count($item->products) }})
+                                                </span>
+                                            </span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {{-- <div class="product-status">
+
+
+                                    <!-- Packages Section -->
+                                    <button type="button" class="collapsible">Packages</button>
+                                    <div class="content" style="display: none;">
+                                        <div class="product-status_stock gap-6 d-flex align-items-center">
+                                            <div class="nice-select category" tabindex="0">
+                                                <ul class="list">
+                                                    @foreach ($packages as $item)
+                                                        <li class="option">{{ $item->title }} ({{ count($item->products) }})</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Categories Section -->
+                                    <button type="button" class="collapsible">Categories</button>
+                                    <div class="content" style="display: none;">
+                                        <div class="product-status_stock gap-6 d-flex align-items-center">
+                                            <div class="nice-select category" tabindex="0">
+                                                <ul class="list">
+                                                    @foreach ($categories as $item)
+                                                        @if (count($item->subcategories) <= 0)
+                                                            <li class="option">{{ $item->name }} ({{ count($item->products) }})</li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            {{-- <script>
+                                var coll = document.getElementsByClassName("collapsible");
+                                var i;
+
+                                for (i = 0; i < coll.length; i++) {
+                                    coll[i].addEventListener("click", function() {
+                                        this.classList.toggle("active");
+                                        var content = this.nextElementSibling;
+                                        if (content.style.display === "block") {
+                                            content.style.display = "none";
+                                        } else {
+                                            content.style.display = "block";
+                                        }
+                                    });
+                                }
+                            </script> --}}
+
+                            <script>
+                                var coll = document.getElementsByClassName("collapsible");
+
+                                for (let i = 0; i < coll.length; i++) {
+                                    coll[i].addEventListener("click", function() {
+                                        // Hide all other sections except the clicked one
+                                        for (let j = 0; j < coll.length; j++) {
+                                            if (coll[j] !== this) {
+                                                coll[j].nextElementSibling.style.display = "none";
+                                                coll[j].classList.remove("active");
+                                            }
+                                        }
+                                        // Toggle the display of the clicked section
+                                        this.classList.toggle("active");
+                                        var content = this.nextElementSibling;
+                                        if (content.style.display === "block") {
+                                            content.style.display = "none";
+                                        } else {
+                                            content.style.display = "block";
+                                        }
+                                    });
+                                }
+                            </script>
+
+
+
+
+
+
+                            {{-- <div class="single-sidebar-widget">
+                                <div class="wid-title">
+                                    <h5>Product Status</h5>
+                                </div>
+                                <div class="product-status">
+                                    <div class="product-status_stock  gap-6 d-flex align-items-center">
+                                        <div class="nice-select category" tabindex="0"><span
+                                                class="current">Publication</span>
+                                            <ul class="list">
+                                                @foreach ($publications as $item)
+                                                    <li class="option">{{ $item->title }} ({{ count($item->products) }})
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-status_stock  gap-6 d-flex align-items-center">
+                                        <div class="nice-select category" tabindex="0"><span
+                                                class="current">Subjects</span>
+                                            <ul class="list">
+                                                @foreach ($subjects as $item)
+                                                    <li class="option">{{ $item->title }} ({{ count($item->products) }})
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-status_stock  gap-6 d-flex align-items-center">
+                                        <div class="nice-select category" tabindex="0"><span
+                                                class="current">Writers</span>
+                                            <ul class="list">
+                                                @foreach ($writers as $item)
+                                                    <li class="option">{{ $item->name }} ({{ count($item->products) }})
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-status_stock  gap-6 d-flex align-items-center">
+                                        <div class="nice-select category" tabindex="0"><span
+                                                class="current">Packages</span>
+                                            <ul class="list">
+                                                @foreach ($packages as $item)
+                                                    <li class="option">{{ $item->title }} ({{ count($item->products) }})
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-status_stock  gap-6 d-flex align-items-center">
+                                        <div class="nice-select category" tabindex="0"><span
+                                                class="current">Categoriries</span>
+                                            <ul class="list">
+                                                @foreach ($categories as $item)
+                                                    @if (count($item->subcategories) <= 0)
+                                                        <li class="option">{{ $item->name }}
+                                                            ({{ count($item->products) }})
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="single-sidebar-widget">
                                 <div class="wid-title">
                                     <h5>Search</h5>
@@ -108,9 +384,10 @@
                                                 Books & Bibles</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="pills-ResearchPublishing-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-ResearchPublishing" type="button" role="tab"
-                                                aria-controls="pills-ResearchPublishing" aria-selected="false">Research &
+                                            <button class="nav-link" id="pills-ResearchPublishing-tab"
+                                                data-bs-toggle="pill" data-bs-target="#pills-ResearchPublishing"
+                                                type="button" role="tab" aria-controls="pills-ResearchPublishing"
+                                                aria-selected="false">Research &
                                                 Publishing Guides</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
@@ -177,6 +454,7 @@
                                 </div>
 
                             </div>
+
                             <div class="single-sidebar-widget mb-50">
                                 <div class="wid-title">
                                     <h5>Filter By Price</h5>
@@ -308,2702 +586,95 @@
                                         </span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
-                    <div class="col-xl-9 col-lg-8 order-1 order-md-2">
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-arts" role="tabpanel"
-                                aria-labelledby="pills-arts-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details.html"><img src="{{ asset('newFrontend') }}/img/book/01.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        Hot
-                                                    </li>
-                                                    <li>
-                                                        -30%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Simple Things You Save BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>
-                                                        $30.00
-                                                        <del>$39.99</del>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00 <del>$39.99</del></li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-Biographies" role="tabpanel"
-                                aria-labelledby="pills-Biographies-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/01.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        Hot
-                                                    </li>
-                                                    <li>
-                                                        -30%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Simple Things You Save BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>
-                                                        $30.00
-                                                        <del>$39.99</del>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00 <del>$39.99</del></li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-ChristianBooks" role="tabpanel"
-                                aria-labelledby="pills-ChristianBooks-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/01.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        Hot
-                                                    </li>
-                                                    <li>
-                                                        -30%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Simple Things You Save BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>
-                                                        $30.00
-                                                        <del>$39.99</del>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00 <del>$39.99</del></li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade show active" id="pills-ResearchPublishing" role="tabpanel"
-                                aria-labelledby="pills-ResearchPublishing-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/01.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        Hot
-                                                    </li>
-                                                    <li>
-                                                        -30%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Simple Things You Save BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>
-                                                        $30.00
-                                                        <del>$39.99</del>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00 <del>$39.99</del></li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-SportsOutdoors" role="tabpanel"
-                                aria-labelledby="pills-SportsOutdoors-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/01.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        Hot
-                                                    </li>
-                                                    <li>
-                                                        -30%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Simple Things You Save BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>
-                                                        $30.00
-                                                        <del>$39.99</del>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00 <del>$39.99</del></li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-FoodDrink" role="tabpanel"
-                                aria-labelledby="pills-FoodDrink-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/01.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        Hot
-                                                    </li>
-                                                    <li>
-                                                        -30%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Simple Things You Save BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>
-                                                        $30.00
-                                                        <del>$39.99</del>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/04.png"
-                                                        alt="img"></a>
-                                                <ul class="post-box">
-                                                    <li>
-                                                        -12%
-                                                    </li>
-                                                </ul>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Qple GPad With Retina Sisplay</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/06.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Castle In The Sky</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$16.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/02.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">How Deal With Very Bad BOOK</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$39.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/03.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">The Hidden Mystery Behind</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$30.00 <del>$39.99</del></li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
-                                        <div class="shop-box-items">
-                                            <div class="book-thumb center">
-                                                <a href="shop-details"><img src="{{ asset('newFrontend') }}/img/book/05.png"
-                                                        alt="img"></a>
-                                                <ul class="shop-icon d-grid justify-content-center align-items-center">
-                                                    <li>
-                                                        <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-cart.html">
-                                                            <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg"
-                                                                alt="svg-icon">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-details.html"><i class="far fa-eye"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="shop-content">
-                                                <h3><a href="shop-details.html">Flovely and Unicom Erna</a></h3>
-                                                <ul class="price-list">
-                                                    <li>$19.00</li>
-                                                    <li>
-                                                        <i class="fa-solid fa-star"></i> 3.4 (25)
-                                                    </li>
-                                                </ul>
-                                                <div class="shop-button">
-                                                    <a href="shop-details.html" class="theme-btn"><i
-                                                            class="fa-solid fa-basket-shopping"></i> Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="page-nav-wrap text-center">
-                            <ul>
-                                <li><a class="previous" href="shop.html">Previous</a></li>
-                                <li><a class="page-numbers" href="shop.html">1</a></li>
-                                <li><a class="page-numbers" href="shop.html">2</a></li>
-                                <li><a class="page-numbers" href="shop.html">3</a></li>
-                                <li><a class="page-numbers" href="shop.html">...</a></li>
-                                <li><a class="next" href="shop.html">Next</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-xl-9 col-lg-8 order-1 order-md-2" id="shop_products">
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <div id="routeData" data-route="{{ route('front.ajax.shop') }}"></div>
+<div id="search_value2" data-route="{{ request('search') }}"></div>
 @endsection
+@push('js')
+<script>
+$(document).ready(function () {
+    $(".subcategory, .writer, .subject, .publication, .category, .sort-select, .package, .ebook").change(function () {
+        updateProducts();
+    });
+    updateProducts();
+
+    function updateProducts(page = 1) {
+        var subcategory = [];
+        var writer = [];
+        var package = [];
+        var subject = [];
+        var publication = [];
+        var category = [];
+        var ebook = [];
+        var sort = $(".sort-select").val();
+
+        $(".subcategory:checked").each(function () {
+            subcategory.push($(this).val());
+        });
+        $(".writer:checked").each(function () {
+            writer.push($(this).val());
+        });
+        $(".subject:checked").each(function () {
+            subject.push($(this).val());
+        });
+        $(".publication:checked").each(function () {
+            publication.push($(this).val());
+        });
+        $(".package:checked").each(function () {
+            package.push($(this).val());
+        });
+        $(".category:checked").each(function () {
+            category.push($(this).val());
+        });
+        $(".ebook:checked").each(function () {
+            ebook.push($(this).val());
+        });
+
+        var routeUrl = $('#routeData').data('route');
+        var search = $('#search_value2').data('route');
+
+        $.ajax({
+            type: "GET",
+            url: routeUrl,
+            data: {
+                subcategory: subcategory,
+                writer: writer,
+                package: package,
+                subject: subject,
+                publication: publication,
+                category: category,
+                ebook: ebook,
+                page: page,
+                sort: sort,
+                search: search
+            },
+            success: function (response) {
+                $("#shop_products").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    $(document).on('click', '.pagination a', function (e) {
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        updateProducts(page);
+    });
+});
+
+</script>
+
+
+@endpush

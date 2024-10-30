@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--<< Header Area >>-->
-@include('newFrontend.layouts.head')
+@include('newFrontend.components.layout.head')
 
 <body>
     <!-- progress bar -->
@@ -168,15 +168,33 @@
                 </ul>
                 <ul class="list main-menu">
                     @if (Auth::check())
-                      <li><button style="border: 2px solid white; padding: 2px 10px; border-radius: 0px 10px 0px 10px;">{{ Auth::user()->name }} <i class="fas fa-angle-down"></i></button></li>
-                    @else
-                    <li>
-                        <button type="button" class="theme-btn"
-                            style="border: 2px solid white; padding: 10px !important;" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">
-                            Login
-                        </button>
-                    </li>
+                        {{-- <li><button style="border: 2px solid white; padding: 2px 10px; border-radius: 0px 10px 0px 10px;">{{ Auth::user()->name }} <i class="fas fa-angle-down"></i></button></li> --}}
+                        {{-- here show name wtih dropdown items profile, dashboard, wishlist, order, logout  --}}
+                        <li>
+                            <div class="dropdown">
+                                <button
+                                    style="border: 2px solid white; padding: 2px 10px; border-radius: 0px 10px 0px 10px;"
+                                    class="dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item text-dark" href="">Profile</a></li>
+                                    {{-- <li><a class="dropdown-item text-dark" href="">Dashboard</a></li>
+                                <li><a class="dropdown-item text-dark" href="">Wishlist</a></li>
+                                <li><a class="dropdown-item text-dark" href="">Order</a></li> --}}
+                                    <li><a class="dropdown-item text-dark"
+                                            href="{{ route('front.logout') }}">Logout</a></li>
+                                </ul>
+                            </div>
+                        @else
+                        <li>
+                            <button type="button" class="theme-btn"
+                                style="border: 2px solid white; padding: 10px !important;" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">
+                                Login
+                            </button>
+                        </li>
                     @endif
                 </ul>
             </div>
@@ -207,86 +225,43 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="shop.html">
+                                                    <a href="{{ route('front.about-us') }}">
+                                                        About Us
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
                                                         Shop
                                                         <i class="fas fa-angle-down"></i>
                                                     </a>
                                                     <ul class="submenu">
-                                                        <li>
-                                                            <a href="shop.html">Shop
-                                                                Default</a>
+                                                        @foreach (menuLinks() as $menu)
+                                                            @if ($menu->category)
+                                                                <li>
+                                                                    <a
+                                                                        href="{{ route('front.shop') }}?category={{ $menu->category->id }}">{{ $menu->category->name }}</a>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                        <li><a href="{{ route('front.subjects') }}">বিষয়</a>
                                                         </li>
-                                                        <li>
-                                                            <a href="shop-list.html">Shop
-                                                                List</a>
+                                                        <li><a href="{{ route('front.writers') }}">লেখক</a>
                                                         </li>
-                                                        <li>
-                                                            <a href="shop-details.html">Shop
-                                                                Details</a>
+                                                        <li><a href="{{ route('front.publications') }}">প্রকাশক</a>
                                                         </li>
-                                                        <li>
-                                                            <a href="shop-cart.html">Shop
-                                                                Cart</a>
+                                                        <li><a href="{{ route('front.best.seller') }}">বইমেলা
+                                                                ২০২৪</a>
                                                         </li>
-                                                        <li>
-                                                            <a href="wishlist.html">Wishlist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html">Checkout</a>
+                                                        <li><a href="{{ route('front.pre.order') }}">প্রি-অর্ডার</a>
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li class="has-dropdown">
-                                                    <a href="about.html">
-                                                        Pages
-                                                        <i class="fas fa-angle-down"></i>
-                                                    </a>
-                                                    <ul class="submenu">
-                                                        <li>
-                                                            <a href="about.html">About Us</a>
-                                                        </li>
-                                                        <li class="has-dropdown">
-                                                            <a href="team.html">
-                                                                Author
-                                                                <i class="fas fa-angle-down"></i>
-                                                            </a>
-                                                            <ul class="submenu">
-                                                                <li>
-                                                                    <a href="team.html">Author</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="team-details.html">Author
-                                                                        Profile</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="faq.html">Faq's</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="404.html">404 Page</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+
+
                                                 <li>
-                                                    <a href="news.html">
+                                                    <a href="{{ route('front.blogs') }}">
                                                         Blog
-                                                        <i class="fas fa-angle-down"></i>
                                                     </a>
-                                                    <ul class="submenu">
-                                                        <li>
-                                                            <a href="news-grid.html">Blog
-                                                                Grid</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="news.html">Blog
-                                                                List</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="news-details.html">Blog
-                                                                Details</a>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                                 <li>
                                                     <a href="contact.html">Contact</a>
@@ -372,101 +347,47 @@
                                                 <li>
                                                     <a href="{{ route('front.home') }}">
                                                         Home
-                                                        {{-- <i class="fas fa-angle-down"></i> --}}
                                                     </a>
-                                                    {{-- <ul class="submenu">
-                                                        <li>
-                                                            <a href="index.html">Home 01</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index-2.html">Home 02</a>
-                                                        </li>
-                                                    </ul> --}}
                                                 </li>
                                                 <li>
-                                                    <a href="shop.html">
+                                                    <a href="{{ route('front.about-us') }}">
+                                                        About Us
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
                                                         Shop
                                                         <i class="fas fa-angle-down"></i>
                                                     </a>
                                                     <ul class="submenu">
-                                                        <li>
-                                                            <a href="shop.html">Shop
-                                                                Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list.html">Shop
-                                                                List</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-details.html">Shop
-                                                                Details</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-cart.html">Shop
-                                                                Cart</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="wishlist.html">Wishlist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html">Checkout</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="has-dropdown">
-                                                    <a href="about.html">
-                                                        Pages
-                                                        <i class="fas fa-angle-down"></i>
-                                                    </a>
-                                                    <ul class="submenu">
-                                                        <li>
-                                                            <a href="about.html">About Us</a>
-                                                        </li>
-                                                        <li class="has-dropdown">
-                                                            <a href="team.html">
-                                                                Author
-                                                                <i class="fas fa-angle-down"></i>
-                                                            </a>
-                                                            <ul class="submenu">
+                                                        @foreach (menuLinks() as $menu)
+                                                            @if ($menu->category)
                                                                 <li>
-                                                                    <a href="team.html">Author</a>
+                                                                    <a
+                                                                        href="{{ route('front.shop') }}?category={{ $menu->category->id }}">{{ $menu->category->name }}</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="team-details.html">Author
-                                                                        Profile</a>
-                                                                </li>
-                                                            </ul>
+                                                            @endif
+                                                        @endforeach
+                                                        <li><a href="{{ route('front.subjects') }}">বিষয়</a>
                                                         </li>
-                                                        <li>
-                                                            <a href="faq.html">Faq's</a>
+                                                        <li><a href="{{ route('front.writers') }}">লেখক</a>
                                                         </li>
-                                                        <li>
-                                                            <a href="404.html">404 Page</a>
+                                                        <li><a href="{{ route('front.publications') }}">প্রকাশক</a>
+                                                        </li>
+                                                        <li><a href="{{ route('front.best.seller') }}">বইমেলা
+                                                                ২০২৪</a>
+                                                        </li>
+                                                        <li><a href="{{ route('front.pre.order') }}">প্রি-অর্ডার</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <a href="news.html">
+                                                    <a href="{{ route('front.blogs') }}">
                                                         Blog
-                                                        <i class="fas fa-angle-down"></i>
                                                     </a>
-                                                    <ul class="submenu">
-                                                        <li>
-                                                            <a href="news-grid.html">Blog
-                                                                Grid</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="news.html">Blog
-                                                                List</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="news-details.html">Blog
-                                                                Details</a>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                                 <li>
-                                                    <a href="contact.html">Contact</a>
+                                                    <a href="{{ route("front.contact") }}">Contact</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -586,18 +507,22 @@
                             <h1 id="registrationModalLabel">
                                 Create an account!
                             </h1>
-                            <input class="inputField" type="text" name="name" id="name"
+                            <input class="inputField" type="text" name="name" id="regName"
                                 placeholder="Name" />
-                            <input class="inputField" type="text" name="phone" placeholder="+8801XXXXXXXXX" />
-                            <input class="inputField" type="email" name="email" placeholder="xyz@example.com" />
+                            <input class="inputField" type="text" name="" id="regPhone"
+                                placeholder="+8801XXXXXXXXX" />
+                            <input class="inputField" type="email" name="" id="regEmail"
+                                placeholder="xyz@example.com" />
 
-                            <input class="inputField" type="password" name="password"
+                            <input class="inputField" type="password" name="regPassword" id="regPassword"
                                 placeholder="Enter Password" />
-                            <input class="inputField" type="password" name="password"
+                            <input class="inputField" type="password" name="regCPassword" id="regCPassword"
                                 placeholder="Enter Confirm Password" />
 
                             <div style="margin-top: 20px !important" class="loginBtn">
-                                <a href="" class="theme-btn rounded-0">Create</a>
+                                <a onclick="userReg()" type="button" class="theme-btn rounded-0">
+                                    Create
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -605,7 +530,68 @@
             </div>
         </div>
     </div>
+    <script>
+        async function userReg() {
+            let regName = document.getElementById("regName").value;
+            let regPhone = document.getElementById("regPhone").value;
+            let regEmail = document.getElementById("regEmail").value;
+            let regPassword = document.getElementById("regPassword").value;
+            let regConfirmPassword = document.getElementById("regCPassword").value;
 
+            if (
+                regName == "" &&
+                regPhone == "" &&
+                regEmail == "" &&
+                regPassword == "" &&
+                regConfirmPassword == ""
+            ) {
+                errorToast("All fields are required.");
+            } else if (regName == "") {
+                errorToast("Please enter your name.");
+            } else if (regPhone == "") {
+                errorToast("Please enter your phone number.");
+            } else if (regEmail == "") {
+                errorToast("Please enter your email.");
+            } else if (regPassword == "") {
+                errorToast("Please enter your password.");
+            } else if (regConfirmPassword == "") {
+                errorToast("Please enter your confirm password.");
+            } else if (regPassword != regConfirmPassword) {
+                errorToast("Password and confirm password does not match.");
+            } else {
+                const re =
+                    /^(?:(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*")|(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*))@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:(?:[ -~]|\\[^\r\n])*)\])$/;
+                if (!re.test(regEmail)) {
+                    errorToast("Please enter a valid email.");
+                } else {
+                    showLoader();
+                    try {
+                        let response = await axios.post("/register", {
+                            name: regName,
+                            phone: regPhone,
+                            email: regEmail,
+                            password: regPassword,
+                            c_password: regConfirmPassword,
+                        });
+                        hideLoader();
+
+                        if (response.data.status == "success") {
+                            successToast(response.data.message);
+                            setTimeout(() => {
+                                window.location.href = response.data.url;
+                            }, 1000);
+                        } else {
+                            // errorToast(response.data.message);
+                            errorToast(response.data["message"]);
+                        }
+                    } catch (error) {
+                        hideLoader();
+                        errorToast("Something went wrong.");
+                    }
+                }
+            }
+        }
+    </script>
     @yield('content')
     <!-- Footer Section start  -->
     @include('newFrontend.components.layout.footer')
@@ -617,6 +603,9 @@
     <script src="{{ asset('newFrontend/js/include/axios.min.js') }}"></script>
     <script src="{{ asset('newFrontend/js/include/toastify-js.js') }}"></script>
     <script src="{{ asset('newFrontend/js/include/custom.js') }}"></script>
+    @yield('script')
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
 
     <!--<< All JS Plugins >>-->
@@ -643,6 +632,7 @@
     <script src="{{ asset('newFrontend') }}/js/gsap.min.js"></script>
     <!--<< Main.js >>-->
     <script src="{{ asset('newFrontend') }}/js/main.js"></script>
+    @stack('js')
 </body>
 
 </html>

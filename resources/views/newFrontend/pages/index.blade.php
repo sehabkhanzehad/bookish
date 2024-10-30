@@ -1,4 +1,7 @@
 @extends('newFrontend.layouts.master')
+@section('title')
+Bookish - Home
+@endsection
 @section('content')
     @include("newFrontend.components.homepage.hero")
 

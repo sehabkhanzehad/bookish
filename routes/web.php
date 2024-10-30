@@ -103,6 +103,7 @@ use App\Http\Controllers\WEB\Seller\Auth\SellerForgotPasswordController;
 
 //Frontend
 use App\Http\Controllers\WEB\Frontend\Auth\AuthController as FrontAuthController;
+use App\Http\Controllers\WEB\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\WEB\Frontend\HomeController as FrontHomeController;
 use App\Http\Controllers\WEB\Frontend\ProductController as FrontProductController;
 use App\Http\Controllers\WEB\Frontend\CartController as FrontCartController;
@@ -837,20 +838,24 @@ Auth::routes();
 
 Route::group(['as' => 'front.'], function(){
     Route::controller(FrontHomeController::class)->group(function(){
-        Route::get('/', 'index')->name('home');
-        Route::get('/category/{type}/{slug}', 'subCategoriesByCategory')->name('subcategory');
-        Route::get('/shop/{slug?}', 'shop')->name('shop');
-        Route::get('show_products', 'ajaxProducts')->name('ajax.shop');
-        Route::get('subjects', 'subjects')->name('subjects');
-        Route::get('/flash-selling-product', 'flashSellProducts')->name('flash-sell');
-        Route::get('/most-selling-product', 'mostSellingProducts')->name('popular');
-        Route::get('/pages/{slug}', 'customPages')->name('customPages');
+        Route::get('/', 'index')->name('home'); // ok
+        Route::get('/about-us', 'about')->name('about-us'); // ok
+        Route::get("/contact", "contact")->name("contact"); // ok
+        // Route::get('/category/{type}/{slug}', 'subCategoriesByCategory')->name('subcategory');
+        Route::get('/shop/{slug?}', 'shop')->name('shop'); // ok
+        Route::get('show_products', 'ajaxProducts')->name('ajax.shop'); // ok
+        // Route::get('/flash-selling-product', 'flashSellProducts')->name('flash-sell');
+        // Route::get('/most-selling-product', 'mostSellingProducts')->name('popular');
+        Route::get('/pages/{slug}', 'customPages')->name('customPages'); // ok
         Route::get('/show/modal', 'showProModal')->name('showProModal');
-        Route::get('subjects', 'subjects')->name('subjects');
-        Route::get('publications', 'publications')->name('publications');
-        Route::get('writers', 'writers')->name('writers');
-        Route::get('best-seller', 'best_seller')->name('best.seller');
-        Route::get('pre-orders', 'pre_order')->name('pre.order');
+
+        Route::get('subjects', 'subjects')->name('subjects'); // ok
+        Route::get('publications', 'publications')->name('publications'); // ok
+        Route::get('authors', 'writers')->name('writers'); // ok
+
+        Route::get('best-seller', 'best_seller')->name('best.seller'); // ok
+        Route::get('pre-orders', 'pre_order')->name('pre.order'); // ok
+
         Route::get('/download/catelog', 'dowloadCatelog')->name('dowloadCatelog');
         Route::get('/download/pdf', 'dowloadApk')->name('dowloadApk');
         Route::get('read/pdf', 'readPdf')->name('readPdf');
@@ -858,11 +863,17 @@ Route::group(['as' => 'front.'], function(){
         Route::get('user/profile', 'profile')->name('profile');
     });
 
+    Route::controller(FrontendBlogController::class)->group(function(){
+        Route::get("/blogs", "index")->name(name: 'blogs'); // ok
+        Route::get("/blog/{slug}/{id}", "blogDetails")->name("blogDetails"); // ok
+        Route::post("blog/comment", "commentStore")->name("blog.comment"); // ok
+    });
+
     Route::controller(FrontProductController::class)->group(function(){
         Route::group(['as'=> 'product.'], function(){
             Route::get('/search-product', 'searchProduct')->name('search');
             Route::get('/brand-product/{slug}', 'brandWiseProduct')->name('brand-product');
-            Route::get('/product/{id}', 'show')->name('show');
+            Route::get('/product/{id}', 'show')->name('show'); // ok
             Route::get('get-variation_price', 'get_variation_price')->name('get-variation_price');
             Route::get('get-variation_color', 'get_color_price')->name('get-variation_color');
             Route::post('/product/reviews', 'reviews')->name('product-reviews.store');
@@ -907,7 +918,7 @@ Route::group(['as' => 'front.'], function(){
         Route::get('login-user', 'logpage')->name('user-log');
         Route::post('/login', 'login')->name('login');
         Route::get('logout', 'logout')->name('logout');
-        Route::post('register', 'register')->name('register');
+        Route::post('/register', 'register')->name('register');
         Route::post('optverify', 'optverify')->name('optverify');
         Route::post('change-password', 'changePassword')->name('pasword.change');
         Route::post('profile-update', 'updateProfile')->name('profile.update');

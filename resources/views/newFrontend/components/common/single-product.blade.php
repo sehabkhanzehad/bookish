@@ -15,17 +15,13 @@
                     <li>-{{ abs(number_format($discount, 0)) }}%</li>
                 </ul>
             @endif
+
             <ul class="shop-icon d-grid justify-content-center align-items-center">
                 <li>
-                    <a href="shop-cart.html"><i class="far fa-heart"></i></a>
-                </li>
-            </ul>
-            <ul class="shop-icon d-grid justify-content-center align-items-center">
-                <li>
-                    <a href="shop-cart.html"><i class="far fa-heart"></i></a>
+                    <a><i class="far fa-heart"></i></a>
                 </li>
                 <li>
-                    <a href="shop-cart.html">
+                    <a>
                         <img class="icon" src="{{ asset('newFrontend') }}/img/icon/shuffle.svg" alt="svg-icon" />
                     </a>
                 </li>

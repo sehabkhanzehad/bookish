@@ -7,7 +7,7 @@
     <meta name="author" content="gramentheme" />
     <meta name="description" content="Bookish - Book Store E-Commerce" />
     <!-- ======== Page title ============ -->
-    <title>Bookish - Home</title>
+    @yield('title')
     <!--<< Favcion >>-->
     <link rel="shortcut icon" href="{{ asset('newFrontend') }}/img/favicon.png" />
     <!--<< Bootstrap min.css >>-->
@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/icomoon.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icomoon@1.0.0/style.min.css" />
+    @yield('css')
     <!--<< Main.css >>-->
     <link rel="stylesheet" href="{{ asset('newFrontend') }}/css/main.css" />
 

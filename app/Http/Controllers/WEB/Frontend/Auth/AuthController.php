@@ -313,12 +313,14 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $data = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'unique:users,email'],
-            'phone' => ['required', 'unique:users,phone'],
-            'password' => ['required', 'min:4', 'confirmed'],
-        ]);
+        // $data = $request->validate([
+        //     'name' => ['required', 'min:3'],
+        //     'email' => ['required', 'unique:users,email'],
+        //     'phone' => ['required', 'unique:users,phone'],
+        //     'password' => ['required', 'min:4', 'confirmed'],
+        // ]);
+
+        $data = $request->all();
 
 
         $data['password'] = Hash::make($request->password);
@@ -326,19 +328,19 @@ class AuthController extends Controller
         if ($user) {
             Auth::login($user);
 
-            // return response()->json([
-            //     'status' => true,
-            //     'msg' => 'Register success',
-            //     'url' => route('front.home'),
-            // ], 200);
+            return response()->json([
+                'status' => "success",
+                'message' => 'Register success',
+                'url' => route('front.home'),
+            ], 200);
 
-            return redirect()->route('front.home');
+            // return redirect()->route('front.home');
         }
 
-        return response()->json([
-            'status' => false,
-            'msg' => 'Something went wrong!',
-        ], 422);
+        // return response()->json([
+        //     'status' => false,
+        //     'msg' => 'Something went wrong!',
+        // ], 422);
         // return back()->route('front.home');
 
     }

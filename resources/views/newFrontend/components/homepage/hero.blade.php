@@ -34,10 +34,10 @@
                             With The Best Price
                         </h1>
                         <div class="form-clt wow fadeInUp" data-wow-delay=".9s">
-                            <button type="submit" class="theme-btn">
-                                Shop Now
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </button>
+                           <a href="{{ route('front.shop') }}"> <button type="submit" class="theme-btn">
+                            Shop Now
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </button></a>
                         </div>
                     </div>
                 </div>

@@ -26,6 +26,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\Testimonial;
 
 class HomeController extends Controller
 {
@@ -53,6 +54,20 @@ class HomeController extends Controller
 
 
         return view('frontend.dashboard', compact('user', 'setting', 'all_order_count', 'all_process_count', 'all_return_count', 'productArray', 'freeproductArray'));
+    }
+
+    public function contact()
+    {
+
+        return view('newFrontend.pages.contact');
+    }
+
+    public function about()
+    {
+        $testimonials = Testimonial::all();
+        $popular_writers = Writer::where('is_popular', 1)->latest()->get();
+
+        return view('newFrontend.pages.about-us', compact('testimonials', 'popular_writers'));
     }
 
     public function index()
@@ -96,7 +111,7 @@ class HomeController extends Controller
             ->where('status', 1)
             ->latest()
             ->get();
-        $pre_orders = Product::where('pre_order', 1)->where('status', 1)->take(15)->get();
+        $pre_orders = Product::with('writer')->where('pre_order', 1)->where('status', 1)->take(15)->get();
         $ebook_list = Product::where('product_type', 3)->where('status', 1)->take(15)->get();
         $packages_products = Product::whereNotNull('package_id')->where('status', 1)->take(15)->get();
         $packages = Package::where('is_home', 1)->where('status', 1)->get();
@@ -115,8 +130,13 @@ class HomeController extends Controller
 
         $cart = session()->get('cart', []);
 
-        $newPublished = Product::latest()->get();
-    // return $categories;
+        $newPublished = Product::with('writer')->latest()->get();
+
+
+        $testimonials = Testimonial::all();
+
+        // return $testimonials;
+        // die();
         // return view('frontend.home.index', compact(
         return view('newFrontend.pages.index', compact(
             'slider',
@@ -151,6 +171,8 @@ class HomeController extends Controller
             'ebook_list',
             'newPublished',     // new
             'categories',
+            'testimonials',
+
         ));
     }
 
@@ -279,7 +301,7 @@ class HomeController extends Controller
             $filteredProducts = $filteredProducts->where('sold_qty', '==', 'qty');
         }
 
-        return view('frontend.shop.index', compact('filteredProducts', 'minPrice', 'maxPrice', 'writers', 'packages', 'publications', 'subjects', 'categories'));
+        return view('newFrontend.pages.shop', compact('filteredProducts', 'minPrice', 'maxPrice', 'writers', 'packages', 'publications', 'subjects', 'categories'));
     }
     function ajaxProducts(Request $request)
     {
@@ -345,8 +367,10 @@ class HomeController extends Controller
         $this->data['products'] = $query->where('status', 1)->paginate($perPage, ['*'], 'page', $page);
         // dd($this->data);
         $this->data['currentPage'] = $page;
+
         $this->data['perPage'] = $perPage;
-        return view('frontend.shop.partial.products', $this->data);
+        // return view('frontend.shop.partial.products', $this->data);
+        return view('newFrontend.components.products', $this->data);
     }
     public function mostSellingProducts()
     {
@@ -400,7 +424,7 @@ class HomeController extends Controller
         $customPage = CustomPage::where('slug', $slug)->first();
 
         // dd($customPage);
-        return view('frontend.pages', compact('customPage'));
+        return view('newFrontend.pages.custom-pages', compact('customPage'));
     }
     function subjects()
     {
@@ -410,7 +434,7 @@ class HomeController extends Controller
             $query->where('title', 'LIKE', '%' . $subject . '%');
         }
         $this->data['subjects'] = $query->get();
-        return view('frontend.shop.subjects', $this->data);
+        return view('newFrontend.pages.subjects', $this->data);
     }
     function writers()
     {
@@ -420,7 +444,7 @@ class HomeController extends Controller
             $query->where('name', 'LIKE', '%' . $subject . '%');
         }
         $this->data['writers'] = $query->get();
-        return view('frontend.shop.writer', $this->data);
+        return view('newFrontend.pages.authors', $this->data);
     }
     function publications()
     {
@@ -430,16 +454,16 @@ class HomeController extends Controller
             $query->where('title', 'LIKE', '%' . $subject . '%');
         }
         $this->data['subjects'] = $query->get();
-        return view('frontend.shop.publications', $this->data);
+        return view('newFrontend.pages.publication', $this->data);
     }
     function best_seller()
     {
-        $this->data['products'] = Product::where('is_best_seller', 1)->get();
-        return view('frontend.shop.best_seller', $this->data);
+        $this->data['products'] = Product::where('is_best_seller', 1)->paginate(12);
+        return view('newFrontend.pages.best-seller', $this->data);
     }
     function pre_order()
     {
-        $this->data['products'] = Product::where('pre_order', 1)->get();
-        return view('frontend.shop.pre_order', $this->data);
+        $this->data['products'] = Product::where('pre_order', 1)->paginate(12);
+        return view('newFrontend.pages.pre-order', $this->data);
     }
 }

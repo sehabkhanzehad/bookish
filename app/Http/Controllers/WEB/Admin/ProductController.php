@@ -57,7 +57,7 @@ class ProductController extends Controller
         $publication_id = $request->publication_id;
         $category_id = $request->category;
         $filter = $request->filter;
-        
+
         $q = $request->q;
 
         $query = Product::with('category', 'seller', 'brand');
@@ -95,7 +95,7 @@ class ProductController extends Controller
                 $row->orWhere('type', 'like', '%' . $q . '%');
             });
         }
-        
+
         $products = $query->latest()
             ->where('vendor_id', '=', 0)
             ->paginate(20);
@@ -238,7 +238,7 @@ class ProductController extends Controller
         //     $image->save(public_path() . '/' . $destation_path);
         //     $product->thumb_image = $image_name;
         // }
-        
+
         if ($request->thumb_image) {
             $image = Image::make($request->file('thumb_image'));
             $extention = $request->thumb_image->getClientOriginalExtension();
@@ -253,13 +253,13 @@ class ProductController extends Controller
             $destation_path = 'uploads/custom-images2/' . $image_name;
             $image->resize(154, 193);
             $image->save(public_path() . '/' . $destation_path);
-            
+
             $destation_path3 = 'uploads/custom-images3/' . $image_name;
             $image->resize(60, 75);
             $image->save(public_path() . '/' . $destation_path3);
-            
+
             $product->thumb_image = $image_name;
-            
+
         }
 
         if ($request->hasFile('digital_file')) {
@@ -270,11 +270,11 @@ class ProductController extends Controller
             $digitalFilePath = 'product_files/' . $digitalFileName;
             $digitalFile->move(public_path('product_files'), $digitalFileName);
             $product->digital_file = $digitalFilePath;
-            
+
             // Log successful file upload
             \Log::info('Digital file uploaded successfully: ' . $digitalFileName);
         }
-        
+
         if ($request->hasFile('pdf_file')) {
             $digitalFile = $request->file('pdf_file');
             $digitalFileName = $request->name . time() . '_' . Str::random(8) . '.' . $digitalFile->getClientOriginalExtension();
@@ -283,7 +283,7 @@ class ProductController extends Controller
             $digitalFilePath = 'product_files/' . $digitalFileName;
             $digitalFile->move(public_path('product_files'), $digitalFileName);
             $product->pdf_file = $digitalFilePath;
-            
+
             // Log successful file upload
             \Log::info('Read file uploaded successfully: ' . $digitalFileName);
         }
@@ -346,7 +346,7 @@ class ProductController extends Controller
             // Log successful file upload
             \Log::info('Read file uploaded successfully: ' . $digitalFileName);
         }
-        
+
         $product->save();
 
         // Handle the converted images
@@ -355,25 +355,25 @@ class ProductController extends Controller
                 $imageName = Str::random(10) . '.png';
                 $imagePath = 'product_images/' . $imageName;
                 $image->move(public_path('product_images'), $imageName);
-                
+
                 $productPdf = new ProductPdf();
                 $productPdf->product_id = $product->id;
                 $productPdf->image = $imagePath;
                 $productPdf->save();
             }
         }
-        
+
         if ($request->hasFile('productfilepdf')) {
             foreach ($request->file('productfilepdf') as $image) {
                 $imageName = Str::random(10) . '.png';
                 $imagePath = 'product_images/' . $imageName;
                 $image->move(public_path('product_images'), $imageName);
-                
+
                 ProductFilePdf::create([
-                    'product_id'=>$product->id,    
-                    'image'=>$imagePath    
+                    'product_id'=>$product->id,
+                    'image'=>$imagePath
                 ]);
-                
+
             }
         }
 
@@ -629,7 +629,7 @@ class ProductController extends Controller
         //         if (File::exists(public_path() . '/uploads/main-image/' . $old_thumbnail)) unlink(public_path() . '/uploads/main-image/' . $old_thumbnail);
         //     }
         // }
-        
+
         if ($request->thumb_image) {
             $old_thumbnail = $product->thumb_image;
             $image = Image::make($request->file('thumb_image'));
@@ -643,7 +643,7 @@ class ProductController extends Controller
             $destation_path2 = 'uploads/custom-images2/' . $image_name;
             $image->resize(154, 193);
             $image->save(public_path() . '/' . $destation_path2);
-            
+
             $destation_path3 = 'uploads/custom-images3/' . $image_name;
             $image->resize(60, 75);
             $image->save(public_path() . '/' . $destation_path3);
@@ -655,7 +655,7 @@ class ProductController extends Controller
                 if (File::exists(public_path() . '/uploads/main-image/' . $old_thumbnail)) unlink(public_path() . '/uploads/main-image/' . $old_thumbnail);
             }
         }
-        
+
         if ($request->hasFile('read_file')) {
             $old_read = $product->read_file;
             $digitalFile = $request->file('read_file');
@@ -670,7 +670,7 @@ class ProductController extends Controller
             // Log successful file upload
             \Log::info('Read file uploaded successfully: ' . $digitalFileName);
         }
-        
+
         if ($request->hasFile('pdf_file')) {
             $old_read = $product->pdf_file;
             $digitalFile = $request->file('pdf_file');
@@ -721,7 +721,7 @@ class ProductController extends Controller
             $product->approve_by_admin = $request->approve_by_admin;
         }
         $product->save();
-        if ($request->hasFile('productpdf')) { 
+        if ($request->hasFile('productpdf')) {
                     // Delete old images from database and filesystem
                     $oldImages = ProductPdf::where('product_id', $product->id)->get();
                     foreach ($oldImages as $oldImage) {
@@ -730,21 +730,21 @@ class ProductController extends Controller
                         }
                         $oldImage->delete();
                     }
-            
+
                     // Save new images
                     foreach ($request->file('productpdf') as $image) {
                         $imageName = Str::random(10) . '.' . $image->getClientOriginalExtension();
                         $imagePath = 'product_images/' . $imageName;
                         $image->move(public_path('product_images'), $imageName);
-            
+
                         $productPdf = new ProductPdf();
                         $productPdf->product_id = $product->id;
                         $productPdf->image = $imagePath;
                         $productPdf->save();
                     }
                 }
-                
-        if ($request->hasFile('productfilepdf')) { 
+
+        if ($request->hasFile('productfilepdf')) {
                     // Delete old images from database and filesystem
                     $oldImages = ProductFilePdf::where('product_id', $product->id)->get();
                     foreach ($oldImages as $oldImage) {
@@ -753,22 +753,22 @@ class ProductController extends Controller
                         }
                         $oldImage->delete();
                     }
-            
+
                     // Save new images
                     foreach ($request->file('productfilepdf') as $image) {
                         $imageName = Str::random(10) . '.' . $image->getClientOriginalExtension();
                         $imagePath = 'product_images/' . $imageName;
                         $image->move(public_path('product_images'), $imageName);
-                        
-            
+
+
                         $productFilePdf = new ProductFilePdf();
                         $productFilePdf->product_id = $product->id;
                         $productFilePdf->image = $imagePath;
                         $productFilePdf->save();
                     }
                 }
-                
-                
+
+
         if ($request->hasFile('images')) {
             $imageData = [];
             foreach ($request->file('images') as $key => $image) {
@@ -1013,7 +1013,7 @@ class ProductController extends Controller
                         $oldImage->delete();
                     }
                 $id = $value->id;
-                    
+
                 $gallery = $product->gallery;
                 $old_thumbnail = $product->thumb_image;
                 $product->delete();
@@ -1059,7 +1059,7 @@ class ProductController extends Controller
         if (!auth()->user()->can('product.destroy')) {
             abort(403, 'Unauthorized action.');
         }
-        
+
         $product = Product::find($id);
         $oldImages = ProductPdf::where('product_id', $product->id)->get();
                     foreach ($oldImages as $oldImage) {
