@@ -65,7 +65,7 @@ class CheckoutController extends Controller
     $setting = Setting::first();
     $bkash_payment =  BkashPayment::firstWhere(['status'=>1]);
     $ssl_payment =  SslcommerzPayment::firstWhere(['status'=>1]);
-    return view('frontend.cart.checkout', compact('cart', 'countries', 'user', 'shippings', 'setting', 'bkash_payment', 'ssl_payment','totalPrice'));
+    return view('newFrontend.pages.checkout', compact('cart', 'countries', 'user', 'shippings', 'setting', 'bkash_payment', 'ssl_payment','totalPrice'));
     }
 
     public function checkoutsing($product_id)

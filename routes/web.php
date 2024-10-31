@@ -890,7 +890,7 @@ Route::group(['as' => 'front.'], function(){
             Route::get('pc-builder', 'pc_builder')->name('pc.builders');
             Route::get('choose-pc-builder-product/{id}', 'view_pc_builder')->name('pc.builder');
             Route::get('cart', 'index')->name('index');
-            Route::post('cart', 'store')->name('store');
+            Route::post('cart', 'store')->name('store'); // ok
             Route::post('pcBuild-cart', 'pcBuildstore')->name('pc.builder.store');
             Route::post('pc-Build-Store', 'pcBuild_store')->name('pcBuildStore');
             Route::get('cart-qty-increase/{id}', 'increaseQty')->name('increase');
@@ -901,7 +901,7 @@ Route::group(['as' => 'front.'], function(){
         });
     });
 
-    Route::resource('checkout', FrontCheckoutController::class);
+    Route::resource('checkout', FrontCheckoutController::class); //
     Route::get('/checkout/{product_id}', [FrontCheckoutController::class,'checkoutsing'])->name('check.single');
     Route::post('/store/landing/data',[FrontCheckoutController::class,'storelandData'])->name('storelandData');
 

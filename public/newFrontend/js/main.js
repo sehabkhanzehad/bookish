@@ -1,17 +1,17 @@
 /*-----------------------------------------------------------------
 
-Template Name: Bookle - Book Store WooCommerce Html Template 
+Template Name: Bookle - Book Store WooCommerce Html Template
 Author:  Gramentheme
 Author URI: https://themeforest.net/user/gramentheme/portfolio
 Version: 1.0.0
-Description: Bookle - Book Store WooCommerce Html Template  
+Description: Bookle - Book Store WooCommerce Html Template
 ------------------------------------------------------------------*/
 /*=================================
    Index Here
 ==================================*/
 /*
-01. Mobile Menu 
-02. Sidebar Toggle 
+01. Mobile Menu
+02. Sidebar Toggle
 03. Body Overlay
 04. Video Popup
 05. Counterup
@@ -24,7 +24,7 @@ Description: Bookle - Book Store WooCommerce Html Template
 12. Quantity
 13. Back to top btn
 14. Category-click
-15. Gsap Animation  
+15. Gsap Animation
 */
 /*=================================
    Index End
@@ -35,14 +35,14 @@ Description: Bookle - Book Store WooCommerce Html Template
 
     $(document).ready(function() {
 
-        // 01.Mobile Menu  
+        // 01.Mobile Menu
         $('#mobile-menu').meanmenu({
             meanMenuContainer: '.mobile-menu',
             meanScreenWidth: "1199",
             meanExpand: ['<i class="far fa-plus"></i>'],
         });
 
-        // 02.Sidebar Toggle 
+        // 02.Sidebar Toggle
         $(".offcanvas__close,.offcanvas__overlay").on("click", function() {
             $(".offcanvas__info").removeClass("info-open");
             $(".offcanvas__overlay").removeClass("overlay-open");
@@ -52,7 +52,7 @@ Description: Bookle - Book Store WooCommerce Html Template
             $(".offcanvas__overlay").addClass("overlay-open");
         });
 
-        // 03.Body Overlay 
+        // 03.Body Overlay
         $(".body-overlay").on("click", function() {
             $(".offcanvas__area").removeClass("offcanvas-opened");
             $(".df-search-area").removeClass("opened");;
@@ -70,7 +70,7 @@ Description: Bookle - Book Store WooCommerce Html Template
             }
         });
 
-        // 04.Video Popup 
+        // 04.Video Popup
         $(".img-popup").magnificPopup({
             type: "image",
             gallery: {
@@ -83,19 +83,19 @@ Description: Bookle - Book Store WooCommerce Html Template
             callbacks: {}
         });
 
-        // 05. Counterup 
+        // 05. Counterup
         $(".count").counterUp({
             delay: 15,
             time: 4000,
         });
 
-        // 06.Wow Animation 
+        // 06.Wow Animation
         new WOW().init();
 
-        // 07.Nice Select 
+        // 07.Nice Select
         $('select').niceSelect();
 
-        //  08.Book Slider 
+        //  08.Book Slider
         if ($('.hero-book-slider').length > 0) {
             const heroBookSlider = new Swiper(".hero-book-slider", {
                 spaceBetween: 30,
@@ -216,7 +216,7 @@ Description: Bookle - Book Store WooCommerce Html Template
             });
         }
 
-        //  09.Testimonial Slider  
+        //  09.Testimonial Slider
         if ($('.testimonial-slider').length > 0) {
             const testimonialSlider = new Swiper(".testimonial-slider", {
                 centeredSlides: true,
@@ -248,7 +248,7 @@ Description: Bookle - Book Store WooCommerce Html Template
             });
         }
 
-        //  10.Team Slider  
+        //  10.Team Slider
         if ($('.team-slider').length > 0) {
             const teamSlider = new Swiper(".team-slider", {
                 spaceBetween: 30,
@@ -411,8 +411,8 @@ Description: Bookle - Book Store WooCommerce Html Template
             });
         });
 
-        //12. Quantity 
-        const inputs = document.querySelectorAll('#qty, #qty2, #qty3');
+        //12. Quantity
+        const inputs = document.querySelectorAll('#qty, #qty2, #quantity, #qty3');
         const btnminus = document.querySelectorAll('.qtyminus');
         const btnplus = document.querySelectorAll('.qtyplus');
 
@@ -448,7 +448,7 @@ Description: Bookle - Book Store WooCommerce Html Template
             });
         }
 
-        // 13.Back to top btn    
+        // 13.Back to top btn
         $(window).scroll(function() {
             if ($(this).scrollTop() > 20) {
                 $("#back-top").addClass("show");
@@ -469,7 +469,7 @@ Description: Bookle - Book Store WooCommerce Html Template
             $(this).toggleClass("items-open");
         });
 
-        //  15.Gsap Animation 
+        //  15.Gsap Animation
         if ($('.cursor-follower').length > 0) {
             var follower = $(".cursor-follower");
 

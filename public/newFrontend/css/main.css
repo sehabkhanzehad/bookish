@@ -2,11 +2,11 @@
 Theme Name: Bookle
 Author: Gramentheme
 Author URI: https://themeforest.net/user/gramentheme
-Description: Bookle - Book Store WooCommerce Html Template 
+Description: Bookle - Book Store WooCommerce Html Template
 Version: 1.0.0
 */
 
-/*  CSS Index Here  
+/*  CSS Index Here
 
 *** Mixins
 *** Variables
@@ -29,7 +29,7 @@ Version: 1.0.0
 *** Section
 *** Shop
 *** Team
-*** Testimonial   
+*** Testimonial
 
 /*CSS Table Of Content Ends Here*/
 
@@ -2821,7 +2821,7 @@ span {
     font-size: 18px;
     color: var(--header);
 }
-
+/* 
 .header-1 .header-right .menu-cart {
     position: relative;
     display: flex;
@@ -2854,11 +2854,11 @@ span {
     }
 }
 
-.header-1 .header-right .menu-cart .cart-icon::before {
+/* .header-1 .header-right .menu-cart .cart-icon::before {
     position: absolute;
     top: -7px;
     left: 0;
-    content: "0";
+    content: "";
     width: 18px;
     line-height: 18px;
     height: 18px;
@@ -2868,11 +2868,11 @@ span {
     font-size: 12px;
     text-align: center;
     font-weight: 500;
-}
+} */
 
 .header-1 .header-right .menu-cart .cart-icon i {
     color: var(--header);
-}
+} */
 
 .header-1 .header-right .menu-cart .sidebar__toggle .bar-icon-2 {
     width: 50px;

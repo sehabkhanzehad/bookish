@@ -321,7 +321,7 @@
                     <div class="border p-2">
                         <h4 class="text-secondary">আরো দেখুন…</h4>
                     </div>
-                    @foreach ($relatedProducts as $item)
+                    @foreach ($relatedProducts as $item)aq
                         <div class="border p-2 border-top-0">
                             <a href="{{ route('front.product.show', [$item->id]) }}" class="text-decoration-none">
                                 <div class="d-flex gap-2">

@@ -303,11 +303,12 @@
                                     </form>
                                 </div>
                                 <div class="menu-cart">
-                                    <a href="wishlist.html" class="cart-icon">
+                                    {{-- <a href="wishlist.html" class="cart-icon">
                                         <i class="fa-regular fa-heart"></i>
-                                    </a>
-                                    <a href="shop-cart.html" class="cart-icon">
-                                        <i class="fa-regular fa-cart-shopping"></i>
+                                    </a> --}}
+                                    <a href="shop-cart.html" style="content: '5' !important " class="cart-icon">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
                                     </a>
                                     <div class="header-humbager ml-30">
                                         <a class="sidebar__toggle" href="javascript:void(0)">
@@ -426,11 +427,11 @@
                                     </form>
                                 </div>
                                 <div class="menu-cart">
-                                    <a href="wishlist.html" class="cart-icon">
+                                    {{-- <a href="wishlist.html" class="cart-icon">
                                         <i class="fa-regular fa-heart"></i>
-                                    </a>
-                                    <a href="shop-cart.html" class="cart-icon">
-                                        <i class="fa-regular fa-cart-shopping"></i>
+                                    </a> --}}
+                                    <a href="" class="cart-icon">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-humbager ml-30">
                                         <a class="sidebar__toggle" href="javascript:void(0)">
