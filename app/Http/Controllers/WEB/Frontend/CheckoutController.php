@@ -106,6 +106,220 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+    //     $inputs = $request->validate([
+    //         'billing_name' => '',
+    //         'billing_email' => '',
+    //         'billing_phone' => '',
+    //         'billing_address' => '',
+    //         'billing_country' => '',
+    //         'billing_state' => '',
+    //         'billing_city' => '',
+    //         'billing_address_type' => '',
+    //         'shipping_name' => 'required',
+    //         'shipping_email' => '',
+    //         'order_phone' => 'required',
+    //         'shipping_address' => 'required',
+    //         'shipping_country' => '',
+    //         'shipping_state' => '',
+    //         'shipping_city' => '',
+    //         'shipping_address_type' => '',
+    //         'payment_method' => 'required',
+    //         'shipping_method' => '',
+    //         'transection_id' => '',
+    //       	'ip_address' => '',
+    //     ]);
+
+    //     $user = Auth::user();
+
+    //     if(empty($user))
+    //     {
+    //     	$user = User::create([
+    //           'name' => $request->shipping_name,
+    //           'phone' => $request->order_phone,
+    //           'address' => $request->shipping_address,
+    //           'password'=> Hash::make('12345678')
+    //         ]);
+    //     } else {
+
+    //     }
+
+
+    //     if(!$user->email)
+    //     {
+    //         $user->email = $user->name."_".rand(111111,999999)."@gmail.com";
+    //         $user->save();
+    //     }
+
+    //     $data['user_id']=$user->id;
+    //     // $shipping_id = isset($request->shipping_method) ? $request->shipping_method : '';
+    //     $couponCode = isset($coupon['code']) ? $coupon['code'] : null;
+    //     $lastOrder = Order::latest()->first();
+
+    //     // $total = $this->calculateCartTotal(
+    //     //     $user,
+    //     //     1235,
+    //     //     $shipping_id
+    //     // );
+
+    //     //Session store
+    //     $newOrderNumber = $lastOrder ? $lastOrder->order_id + 1 : 1;
+    //     Session::forget(['total_order_amount', 'invoice_number', 'user']);
+    //     Session::put('total_order_amount', $request->cart_total_amount);
+    //     Session::put('invoice_number', $newOrderNumber);
+    //     Session::put('user', $user);
+
+
+    //     // $shipping_rule = Shipping::find($inputs['shipping_method'])->shipping_rule;
+
+    //     $data = [];
+    //     $data['order_id'] = $newOrderNumber;
+    //     $data['user_id'] =  $user->id;
+    //   	$data['order_phone'] = $user->phone;
+    //   	$data['ip_address'] =  $request->ip_address;
+    //     $data['product_qty'] = cartTotalAmount()['total_qty'];
+
+    //     // $data['payment_method'] = 'cash_on_delivery';
+    //     $data['payment_method'] = $inputs['payment_method'];
+    //     $data['shipping_method'] = isset($request->shipping_method) ? $request->shipping_method : '';
+    //     $data['ordered_delivery_date'] = $request->ordered_delivery_date;
+    //     $data['ordered_delivery_time'] = $request->ordered_delivery_time;
+
+    //     $data['total_amount'] = $request->cart_total_amount;
+    //     $data['coupon_coast'] = '';
+    //     $data['shipping_cost'] = $request->shipCharge;
+    //     $data['order_status'] = 0;
+    //     $data['cash_on_delivery'] = 0;
+    //     $data['additional_info'] = 0;
+    //     $data['assign_id'] = User::inRandomOrder()->first()->id;
+
+    //     // Order Assign Among Users Start
+
+    //     $assign_user_id=1;
+    //     $users=User::whereHas('roles', function($query){
+    //                       $query->where('roles.name','Employee');
+    //                     })->where('active_status',1)
+    //                     ->select('id')
+    //                     ->pluck('id')->toArray();
+
+    //     $ordering=count($users)-1;
+    //     if(count($users)==1){
+    //         $assign_user_id=$users[0];
+    //         $data['assign_user_id'] = $assign_user_id;
+    //     }else if($ordering>0){
+    //         $order=Order::latest()->take($ordering)->get()->pluck('assign_user_id')->toArray();
+
+    //         $output = array_merge(array_diff($order, $users), array_diff($users, $order));
+
+    //         if(!empty($output)){
+    //             $assign_user_id=$output[0];
+    //             $data['assign_user_id'] = $assign_user_id;
+    //         }
+
+    //         else {
+    //             $data['assign_user_id'] = $assign_user_id;
+    //         }
+
+    //     }
+
+    //     // Order Assign Among Users End.
+    //     try{
+    //         DB::beginTransaction();
+    //         $order = Order::create($data);
+    //         if($order)
+    //         {
+    //             $cart = session()->get('cart', []);
+    //             foreach($cart as $key => $item)
+    //             {
+    //                 $unit_price = $item['price'];
+
+    //                 $orderProduct = OrderProduct::create([
+    //                     'order_id' => $order->id,
+    //                     'product_id' => $item['product_id'],
+    //                     'seller_id' => 0,
+    //                     'product_name' => $item['name'],
+    //                     'product_image' => $item['image'],
+    //                   	'variation_color_id' => $item['variation_color'],
+    //                   	'variation' =>  $item['variation_size'],
+    //                     'unit_price' => $unit_price,
+    //                     'total_discount' => $item['quantity'] * $item['discount_price'],
+    //                     'qty' => $item['quantity']
+    //                 ]);
+
+    //                 // dd($orderProduct);
+    //                    $single_product = Product::find($item['product_id']);
+    //                    $single_product->sold_qty = $single_product->sold_qty + $item['quantity'];
+    //                    $single_product->qty = $single_product->qty - $item['quantity'];
+    //                    $single_product->save();
+    //                 }
+
+    //             $order->orderAddress()->create([
+    //                 'billing_name' =>  $request->billing_name,
+    //                 'billing_email' => $request->billing_email,
+    //                 'billing_phone' =>  $request->billing_phone,
+    //                 'billing_address' =>  $request->billing_address,
+    //                 'billing_country' =>  $request->billing_country,
+    //                 'billing_state' =>  $request->billing_state,
+    //                 'billing_city' =>  $request->billing_city,
+    //                 'billing_address_type' =>  $request->billing_address_type,
+    //                 'shipping_name' => $request->shipping_name,
+    //                 'shipping_email' => $request->shipping_email,
+    //                 'shipping_phone' =>   $user->phone,
+    //                 'shipping_address' =>  $request->shipping_address,
+    //                 'shipping_country' =>  $request->shipping_country,
+    //                 'shipping_state' =>  $request->shipping_state,
+    //                 'shipping_city' =>  $request->shipping_city,
+    //                 'shipping_address_type' =>  $request->shipping_address_type,
+    //                 'payment_method' => $request->payment_method,
+    //                 'shipping_method' => $request->shipping_method,
+    //                 'transection_id' => $request->transection_id,
+    //             ]);
+    //         }
+
+    //         DB::commit();
+    //         session()->put('cart', []);
+    //         session()->put('coupon', []);
+
+    //     }catch(\Exception $e)
+    //     {
+    //         DB::rollback();
+    //         return response()->json([
+    //             'status' => false,
+    //             'msg' => $e->getMessage(),
+    //         ]);
+    //     }
+    //     if($request->payment_method == 'cash_on_delivery')
+    //     {
+    //         return response()->json([
+    //             'status' => true,
+    //             'msg' => 'Order placed successfully',
+    //             'url' => route('front.order-thanks-page', $user->phone),
+    //             'invoiceId'=>$order->id
+    //         ], 200);
+    //     }
+    //     else if($request->payment_method == 'ssl_commerz')
+    //     {
+    //        return response()->json([
+    //             'status' => true,
+    //             'msg' => 'Please complete your SSLCommerz payment!',
+    //             'url' => route('user.checkout.sslcommerz-web-view')
+    //         ], 200);
+    //     }
+    //     else if($request->payment_method == 'bkash')
+    //     {
+    //        return response()->json([
+    //             'status' => true,
+    //             'msg' => 'Order placed successfully! Please complete your bkash payment!',
+    //             'url' => route('user.checkout.bkash-url-pay')
+    //         ], 200);
+    //     }
+
+    //     else{
+    //         dd($request->all());
+    //     }
+
+    // }
     public function store(Request $request)
     {
         $inputs = $request->validate([
@@ -119,76 +333,81 @@ class CheckoutController extends Controller
             'billing_address_type' => '',
             'shipping_name' => 'required',
             'shipping_email' => '',
-            'order_phone' => 'required',
+            'order_phone' => 'required|numeric',
             'shipping_address' => 'required',
             'shipping_country' => '',
             'shipping_state' => '',
             'shipping_city' => '',
             'shipping_address_type' => '',
             'payment_method' => 'required',
-            'shipping_method' => '',
+            'shipping_method' => 'required',
             'transection_id' => '',
-          	'ip_address' => '',
+            'ip_address' => '',
         ]);
 
-        $user = Auth::user();
-        
-        if(empty($user))
-        {
-        	$user = User::create([
-              'name' => $request->shipping_name,
-              'phone' => $request->order_phone,
-              'address' => $request->shipping_address,
-              'password'=> Hash::make('12345678')
-            ]);
-        } else {
-            
-        }
-        
+        $phone = $request->order_phone;
 
-        if(!$user->email)
-        {
-            $user->email = $user->name."_".rand(111111,999999)."@gmail.com";
+        if (User::where('phone', $phone)->exists()) {
+            $user = User::where('phone', $phone)->first();
+        } else {
+            $user = User::create([
+                'name' => $request->shipping_name,
+                'phone' => $request->order_phone,
+                'address' => $request->shipping_address
+            ]);
+        }
+
+
+        // $user = Auth::user();
+        // if(empty($user))
+        // {
+        // 	$user = User::create([
+        //       'name' => $request->shipping_name,
+        //       'phone' => $request->order_phone,
+        //       'address' => $request->shipping_address
+        //     ]);
+        // }
+
+        if (!$user->email) {
+            $user->email = $user->name . "_" . rand(111111, 999999) . "@gmail.com";
             $user->save();
         }
 
-        $data['user_id']=$user->id;
-        // $shipping_id = isset($request->shipping_method) ? $request->shipping_method : '';
+        $data['user_id'] = $user->id;
+        $shipping_id = $inputs['shipping_method'];
         $couponCode = isset($coupon['code']) ? $coupon['code'] : null;
         $lastOrder = Order::latest()->first();
-        
-        // $total = $this->calculateCartTotal(
-        //     $user,
-        //     1235,
-        //     $shipping_id
-        // );
+        $total = $this->calculateCartTotal(
+            $user,
+            1235,
+            $shipping_id
+        );
 
         //Session store
         $newOrderNumber = $lastOrder ? $lastOrder->order_id + 1 : 1;
         Session::forget(['total_order_amount', 'invoice_number', 'user']);
-        Session::put('total_order_amount', $request->cart_total_amount);
+        Session::put('total_order_amount', $total['total_price']);
         Session::put('invoice_number', $newOrderNumber);
         Session::put('user', $user);
 
-
-        // $shipping_rule = Shipping::find($inputs['shipping_method'])->shipping_rule;
+        $shipping_rule = Shipping::find($inputs['shipping_method'])->shipping_rule;
 
         $data = [];
         $data['order_id'] = $newOrderNumber;
         $data['user_id'] =  $user->id;
-      	$data['order_phone'] = $user->phone;
-      	$data['ip_address'] =  $request->ip_address;
+        $data['order_phone'] = $user->phone;
+        $data['ip_address'] =  $request->ip_address;
         $data['product_qty'] = cartTotalAmount()['total_qty'];
 
         // $data['payment_method'] = 'cash_on_delivery';
         $data['payment_method'] = $inputs['payment_method'];
-        $data['shipping_method'] = isset($request->shipping_method) ? $request->shipping_method : '';
+        $data['shipping_method'] = $shipping_rule;
         $data['ordered_delivery_date'] = $request->ordered_delivery_date;
         $data['ordered_delivery_time'] = $request->ordered_delivery_time;
 
-        $data['total_amount'] = $request->cart_total_amount;
-        $data['coupon_coast'] = '';
-        $data['shipping_cost'] = $request->shipCharge;
+        $data['total_amount'] = $total["total_price"];
+        $data['coupon_coast'] = $total["coupon_price"];
+        $data['shipping_cost'] = $total["shipping_fee"];
         $data['order_status'] = 0;
         $data['cash_on_delivery'] = 0;
         $data['additional_info'] = 0;
@@ -196,42 +415,37 @@ class CheckoutController extends Controller
 
         // Order Assign Among Users Start
 
-        $assign_user_id=1;
-        $users=User::whereHas('roles', function($query){
-                          $query->where('roles.name','Employee');
-                        })->where('active_status',1)
-                        ->select('id')
-                        ->pluck('id')->toArray();
+        $assign_user_id = 1;
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('roles.name', 'Employee');
+        })->where('active_status', 1)
+            ->select('id')
+            ->pluck('id')->toArray();
 
-        $ordering=count($users)-1;
-        if(count($users)==1){
-            $assign_user_id=$users[0];
+        $ordering = count($users) - 1;
+        if (count($users) == 1) {
+            $assign_user_id = $users[0];
             $data['assign_user_id'] = $assign_user_id;
-        }else if($ordering>0){
-            $order=Order::latest()->take($ordering)->get()->pluck('assign_user_id')->toArray();
+        } else if ($ordering > 0) {
+            $order = Order::latest()->take($ordering)->get()->pluck('assign_user_id')->toArray();
 
             $output = array_merge(array_diff($order, $users), array_diff($users, $order));
 
-            if(!empty($output)){
-                $assign_user_id=$output[0];
+            if (!empty($output)) {
+                $assign_user_id = $output[0];
+                $data['assign_user_id'] = $assign_user_id;
+            } else {
                 $data['assign_user_id'] = $assign_user_id;
             }
-
-            else {
-                $data['assign_user_id'] = $assign_user_id;
-            }
-
         }
 
         // Order Assign Among Users End.
-        try{
+        try {
             DB::beginTransaction();
             $order = Order::create($data);
-            if($order)
-            {
+            if ($order) {
                 $cart = session()->get('cart', []);
-                foreach($cart as $key => $item)
-                {
+                foreach ($cart as $key => $item) {
                     $unit_price = $item['price'];
 
                     $orderProduct = OrderProduct::create([
@@ -240,19 +454,21 @@ class CheckoutController extends Controller
                         'seller_id' => 0,
                         'product_name' => $item['name'],
                         'product_image' => $item['image'],
-                      	'variation_color_id' => $item['variation_color'],
-                      	'variation' =>  $item['variation_size'],
+                        'variation_color_id' => $item['variation_color'],
+                        'variation' =>  $item['variation_size'],
+                        'size_id' => $item['variation_size_id'],
+                        'color_id' => $item['variation_color_id'],
                         'unit_price' => $unit_price,
-                        'total_discount' => $item['quantity'] * $item['discount_price'],
+                        'total_discount' => (int)$item['quantity'] * (int)$item['discount_price'],
                         'qty' => $item['quantity']
                     ]);
 
                     // dd($orderProduct);
-                       $single_product = Product::find($item['product_id']);
-                       $single_product->sold_qty = $single_product->sold_qty + $item['quantity'];
-                       $single_product->qty = $single_product->qty - $item['quantity'];
-                       $single_product->save();
-                    }
+                    $single_product = Product::find($item['product_id']);
+                    $single_product->sold_qty = $single_product->sold_qty + $item['quantity'];
+                    $single_product->qty = $single_product->qty - $item['quantity'];
+                    $single_product->save();
+                }
 
                 $order->orderAddress()->create([
                     'billing_name' =>  $request->billing_name,
@@ -275,51 +491,63 @@ class CheckoutController extends Controller
                     'shipping_method' => $request->shipping_method,
                     'transection_id' => $request->transection_id,
                 ]);
+                foreach ($cart as $key => $item) {
+
+                    // dd($item['quantity']);
+                    if ($item['variation_color_id'] > 0 || $item['variation_size_id'] > 0) {
+                        $chekckVarSingle = Product::where('id',  $item['product_id'])->first();
+
+                        $stockCheck = ProductStock::where('color_id', $item['variation_color_id'])->where('size_id', $item['variation_size_id'])->where('product_id', $item['product_id'])->first();
+                        // dd( $stockCheck->quantity);
+                        $ultimate_stock = $stockCheck->quantity - $item['quantity'];
+                        $stockCheck->update([
+                            'quantity' => $ultimate_stock,
+                        ]);
+                    } else {
+                        $chekckVarSingle = Product::where('id',  $item['product_id'])->first();
+                        $stockCheck = ProductStock::where('color_id', 1)->where('size_id', 1)->where('product_id', $item['product_id'])->first();
+                        $ultimate_stock = $stockCheck->quantity - $item['quantity'];
+                        $stockCheck->update([
+                            'quantity' => $ultimate_stock,
+                        ]);
+                    }
+                }
             }
 
             DB::commit();
             session()->put('cart', []);
             session()->put('coupon', []);
-
-        }catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollback();
             return response()->json([
                 'status' => false,
                 'msg' => $e->getMessage(),
             ]);
         }
-        if($request->payment_method == 'cash_on_delivery')
-        {
+        if ($request->payment_method == 'cash_on_delivery') {
             return response()->json([
                 'status' => true,
                 'msg' => 'Order placed successfully',
                 'url' => route('front.order-thanks-page', $user->phone),
-                'invoiceId'=>$order->id
+                'invoiceId' => $order->id
             ], 200);
-        }
-        else if($request->payment_method == 'ssl_commerz')
-        {
-           return response()->json([
+        } else if ($request->payment_method == 'ssl_commerz') {
+            return response()->json([
                 'status' => true,
-                'msg' => 'Please complete your SSLCommerz payment!',
+                'msg' => 'Order placed successfully! Please complete payment!',
                 'url' => route('user.checkout.sslcommerz-web-view')
             ], 200);
-        }
-        else if($request->payment_method == 'bkash')
-        {
-           return response()->json([
+        } else if ($request->payment_method == 'bkash') {
+            return response()->json([
                 'status' => true,
                 'msg' => 'Order placed successfully! Please complete your bkash payment!',
                 'url' => route('user.checkout.bkash-url-pay')
             ], 200);
-        }
-
-        else{
+        } else {
             dd($request->all());
         }
-
     }
+
 
     public function storelandData(Request $request)
     {
@@ -390,8 +618,8 @@ class CheckoutController extends Controller
         $data['ordered_delivery_date'] = $request->ordered_delivery_date;
         $data['ordered_delivery_time'] = $request->ordered_delivery_time;
         $data['total_amount'] = $request->total_amount;
-        // $data['coupon_coast'] = $total["coupon_price"];
-        // $data['shipping_cost'] = $total["shipping_fee"];
+        $data['coupon_coast'] = $total["coupon_price"];
+        $data['shipping_cost'] = $total["shipping_fee"];
         $data['order_status'] = 0;
         $data['cash_on_delivery'] = 0;
         $data['additional_info'] = 0;
@@ -886,11 +1114,11 @@ class CheckoutController extends Controller
         }
 
     }
-    
+
     public function callback(Request $request)
     {
         $allRequest = $request->all();
-        
+
         // dd($allRequest);
 
         if(isset($allRequest['status']) && $allRequest['status'] == 'failure'){
@@ -907,7 +1135,7 @@ class CheckoutController extends Controller
             $response = $this->execute($allRequest['paymentID']);
 
             $arr = json_decode($response,true);
-            
+
             if(array_key_exists("statusCode",$arr) && $arr['statusCode'] != '0000')
             {
                 return view('CheckoutURL.fail')->with([
@@ -921,7 +1149,7 @@ class CheckoutController extends Controller
                 $queryResponse = $this->query($allRequest['paymentID']);
                 if($arr['transactionStatus'] == 'Completed' && $arr['statusMessage'] == 'Successful')
                 {
-                    
+
                 $orderId=$arr['merchantInvoiceNumber'];
                 $order=Order::where('order_id', $orderId)->first();
                 if($order)

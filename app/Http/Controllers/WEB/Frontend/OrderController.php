@@ -13,46 +13,39 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('orderProducts')->where('user_id', Auth::id())->latest()->get();
-// dd($orders);
-        return view('frontend.order.index', compact('orders'));
+        return view('newFrontend.pages.order-list', compact('orders'));
     }
-    
-    public function order_list($phone)
+
+    public function order_list($phone) // ok
     {
         $orders = Order::with('orderProducts')->where('order_phone', $phone)->latest()->get();
       	$order_inv = Order::with('orderProducts')->where('order_phone', $phone)->first();
-      			  
-        return view('frontend.order.index', compact('orders', 'order_inv'));
+
+        return view('newFrontend.pages.order-list', compact('orders', 'order_inv'));
     }
-  	public function thanks_page($phone)
+  	public function thanks_page($phone) // ok
     {
       	$order_inv = Order::with('orderProducts')->where('order_phone', $phone)->first();
-        return view('frontend.order.thanks_page', compact('order_inv'));
+        return view('newFrontend.pages.thanks', compact('order_inv'));
     }
-  	
+
   	public function downloadFile($orderId,$productId){
   	    $productDetails=Product::find($productId);
   	    $file=$productDetails->pdf_file;
   	    return response()->download(public_path($file));
   	}
 
-    public function show($id)
-    {
-        $order = Order::with('user', 'orderProducts')->findOrFail($id);
-      //dd($order);
-
-        // $view = view('frontend.order.show', compact('order'))->render();
-        // return response()->json([
-        //     'status' => true,
-        //     'html' => $view,
-        // ]);
-        return view('frontend.order.show', compact('order'));
-    }    
-    
-    public function print($id)
+    public function show($id) // ok
     {
         $order = Order::with('user', 'orderProducts')->findOrFail($id);
 
-        return view('frontend.order.print', compact('order'));
+        return view('newFrontend.pages.order-details', compact('order'));
     }
+
+    // public function print($id)
+    // {
+    //     $order = Order::with('user', 'orderProducts')->findOrFail($id);
+
+    //     return view('frontend.order.print', compact('order'));
+    // }
 }

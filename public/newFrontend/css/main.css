@@ -2804,7 +2804,7 @@ span {
     background-color: var(--white);
     padding: 14px 20px;
     width: 100%;
-    border-radius: 0px 100px 100px 0px;
+    border-radius: 5px;
     color: var(--header);
     font-weight: 500;
 }
@@ -2821,7 +2821,7 @@ span {
     font-size: 18px;
     color: var(--header);
 }
-/* 
+/*
 .header-1 .header-right .menu-cart {
     position: relative;
     display: flex;

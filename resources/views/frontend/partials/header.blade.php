@@ -144,6 +144,7 @@
                             <img src="{{ asset(siteInfo()->logo) }}" alt="Logo" width="110">
                         </a>
                         <div class="col-lg-5 col-md-12 col-12 search-col my-lg-0 my-md-4 my-4">
+
                             <form action="{{ route('front.shop') }}" id="search_form">
                                 <div class="input-group justify-content-md-center">
                                     <input type="text" value="{{ request('search') }}" name="search"
@@ -155,6 +156,7 @@
                                     </div>
                                 </div>
                             </form>
+                            
                         </div>
                         <div
                             class="col-lg-2 col-md-3 col-5 d-lg-none d-flex justify-content-end align-items-center me-lg-3 me-0">

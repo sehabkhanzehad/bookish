@@ -1,15 +1,10 @@
 @extends('newFrontend.layouts.master')
 @section('title')
-    Checkouta
+    Checkout
 @endsection
-
 @section('content')
 
-<style>
-    .container-fluid * {
-        font-weight: 600;
-    }
-</style>
+
     <!-- Breadcumb Section Start -->
     <div class="breadcrumb-wrapper">
         <div class="book1">
@@ -41,7 +36,7 @@
     </div>
 
     <!-- Shop Cart Section Start -->
-    <div class="cart-section"> 
+    <div class="cart-section">
         <div class="container">
             <div class="main-cart-wrapper">
                 {{-- <div class="row g-5">
@@ -218,7 +213,8 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <tr style="font-size: 16px !important;
+                                            <tr
+                                                style="font-size: 16px !important;
                                                         padding-bottom: none !important;">
                                                 <th></th>
                                                 <th style="font-size: 16px !important;">Image</th>
@@ -232,7 +228,7 @@
                                         <tbody>
                                             @php $sub_total = 0; @endphp
                                             @forelse($cart as $key => $item)
-                                                <tr>
+                                                <tr class="text-center">
 
                                                     <td>
                                                         <div class="remove">
@@ -265,7 +261,10 @@
                                                         <div class="d-flex">
                                                             <button class="btn rounded-0 border border-muted dec"
                                                                 data-id="{{ $key }}">-</button>
-                                                    <input type="number" min="1" class="border text-black border-muted text-center rounded-0 quantity-value" value="{{ $item['quantity'] }}" data-id="{{ $key }}" required>
+                                                            <input type="number" min="1"
+                                                                class="border text-black border-muted text-center rounded-0 quantity-value"
+                                                                value="{{ $item['quantity'] }}"
+                                                                data-id="{{ $key }}" required>
                                                             <button class="btn rounded-0 border border-muted inc"
                                                                 data-exist_qty="{{ $item['stock_qty'] }}"
                                                                 data-id="{{ $key }}">+</button>
@@ -276,7 +275,7 @@
                                                 @php $sub_total += $item['quantity'] * $item['price']; @endphp
                                             @empty
                                             @endforelse
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -285,7 +284,7 @@
                                                 <td>Subtotal</td>
                                                 <td>{{ $sub_total }} ৳</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -296,7 +295,7 @@
                                                     <p id="shipping_value">0.00 </p>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -319,38 +318,42 @@
 
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <div class="d-flex justify-content-between align-item-conter al_btn">
-                                                        <a class="btn btn-normal" href="{{ url('login-user') }}"
-                                                            class="text-muted text-decoration-none icon-signin">Login
-                                                            here</a>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div id="coupon-toggle" class="btn btn-normal">
+                                                @auth
+                                                @else
+                                                    <td>
+                                                        <div class="d-flex justify-content-between align-item-conter al_btn">
+                                                            <button type="button" class="theme-btn rounded-0"
+                                                                data-bs-toggle="modal" data-bs-target="#loginModal"><i
+                                                                    class="fa fa-edit"></i>
+                                                                Login</button>
+                                                        </div>
+                                                    </td>
+                                                @endauth
+                                                {{-- <td>
+                                                    <div id="coupon-toggle" class="theme-btn" style="cursor: pointer;">
                                                         {{ BanglaText('coupon_apply') }}</div>
                                                     <br>
                                                     <br>
                                                     <div class="row" id="coupon-form" style="display: none;">
-                                                        <form action="{{ route('front.cart.apply-coupon') }}"
+                                                        <form class="" action="{{ route('front.cart.apply-coupon') }}"
                                                             method="post" id="coupon_form">
                                                             @csrf
 
                                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                                                <input type="text" class="" name="code"
+                                                                <input type="text" class="form-control" name="code"
                                                                     id="code" value=""
                                                                     placeholder="Enter Coupon Code">
                                                                 <input type="hidden" name="shipping_id" id="shipping_id"
                                                                     value="">
                                                             </div>
-                                                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                                                <button type="submit" class="btn btn-normal">Apply
+                                                            <div class="form-group col-md-12 col-sm-12 col-xs-12 mt-3">
+                                                                <button type="submit" class="theme-btn">Apply
                                                                     Coupon <i class="fas fa-arrow-right"></i></button>
                                                             </div>
                                                         </form>
                                                     </div>
 
-                                                </td>
+                                                </td> --}}
                                             </tr>
 
                                         </tbody>
@@ -383,7 +386,7 @@
                                             <input type="text" class="form-control shadow-none" name="shipping_name"
                                                 id="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
                                                 placeholder="Name">
-                                            {{-- <label for="name" class="ps-4">{{ BanglaText('name') }}</label> --}}
+                                            <label for="name" class="ps-4">Name</label>
                                         </div>
                                         <input type="hidden" name="variation_color_id"
                                             value="{{ $item['variation_color'] }}" />
@@ -397,9 +400,9 @@
                                                 minlength="11" name="order_phone"
                                                 value="{{ Auth::check() ? Auth::user()->phone : '' }}" id="phone"
                                                 placeholder="Enter Phone Number" aria-describedby="phone-help">
-                                            {{-- <label for="phone" class="ps-4">
-                                                {{ BanglaText('mobile') }}
-                                            </label> --}}
+                                            <label for="phone" class="ps-4">
+                                                Phone
+                                            </label>
 
                                         </div>
 
@@ -415,9 +418,8 @@
                                                 <input type="text" class="form-control shadow-none"
                                                     name="shipping_address" value="" id="address"
                                                     placeholder="Address">
-                                                {{-- <label for="address">
-                                                    {{ BanglaText('address') }}
-                                                </label> --}}
+                                                <label for="address">
+                                                    Address </label>
                                             </div>
                                         </div>
                                     </div>
@@ -500,15 +502,15 @@
                                             </label>
                                         </div>
                                     @endif --}}
-                                    <button type="submit" class="btn btn-normal">{{ BanglaText('confirm_order') }}
+                                    <button type="submit" class="theme-btn w-100 mt-3">Confirm Order
                                         <i class="fas fa-arrow-right"></i></button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> 
-        </div> 
+            </div>
+        </div>
     </div>
 
 
@@ -520,6 +522,8 @@
     @endforeach
     <input type="hidden" name="total_cart_price" value="{{ $totalPrice }}">
 @endsection
+
+
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 

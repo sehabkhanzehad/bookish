@@ -570,7 +570,7 @@ Bookish - Home
                         Get 25% discount in all <br />
                         kind of super Selling
                     </h2>
-                    <a href="shop.html" class="theme-btn wow fadeInUp" data-wow-delay=".5s"
+                    <a href="{{ route('front.shop') }}" class="theme-btn wow fadeInUp" data-wow-delay=".5s"
                         style="
                                 visibility: visible;
                                 animation-delay: 0.5s;

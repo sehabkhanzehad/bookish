@@ -179,10 +179,11 @@
                                     {{ Auth::user()->name }}
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item text-dark" href="">Profile</a></li>
-                                    {{-- <li><a class="dropdown-item text-dark" href="">Dashboard</a></li>
-                                <li><a class="dropdown-item text-dark" href="">Wishlist</a></li>
-                                <li><a class="dropdown-item text-dark" href="">Order</a></li> --}}
+                                    {{-- <li><a class="dropdown-item text-dark" href="">Profile</a></li> --}}
+                                    <li><a class="dropdown-item text-dark"
+                                            href="{{ route('front.order.index') }}">Orders</a></li>
+                                    {{-- <li><a class="dropdown-item text-dark" href="">Wishlist</a></li> --}}
+                                    {{-- <li><a class="dropdown-item text-dark" href="">Order</a></li> --}}
                                     <li><a class="dropdown-item text-dark"
                                             href="{{ route('front.logout') }}">Logout</a></li>
                                 </ul>
@@ -275,29 +276,12 @@
                         <div class="col-6 col-md-6 col-lg-2 col-xl-4 col-xxl-2">
                             <div class="header-right">
                                 <div class="category-oneadjust gap-6 d-flex align-items-center">
-                                    <div class="icon">
-                                        <i class="fa-sharp fa-solid fa-grid-2"></i>
-                                    </div>
-                                    <select name="cate" class="category">
-                                        <option value="1">Category</option>
-                                        <option value="1">
-                                            Web Design
-                                        </option>
-                                        <option value="1">
-                                            Web Development
-                                        </option>
-                                        <option value="1">
-                                            Graphic Design
-                                        </option>
-                                        <option value="1">
-                                            Softwer Eng
-                                        </option>
-                                    </select>
-                                    <form action="#" class="search-toggle-box d-md-block">
-                                        <div class="input-area">
-                                            <input type="text" placeholder="Author" />
-                                            <button class="cmn-btn">
-                                                <i class="far fa-search"></i>
+                                    <form action="{{ route('front.shop') }}" id="search_form" class="search-toggle-box d-md-block">
+
+                                        <div class="input-area" style="border-radius: none !important;">
+                                            <input type="text" placeholder="Search" {{ request('search') }}" name="search">
+                                            <button type="submit" class="cmn-btn" >
+                                                Search
                                             </button>
                                         </div>
                                     </form>
@@ -306,18 +290,19 @@
                                     {{-- <a href="wishlist.html" class="cart-icon">
                                         <i class="fa-regular fa-heart"></i>
                                     </a> --}}
-                                    <a href="shop-cart.html" style="content: '5' !important " class="cart-icon">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
+                                    <a href="{{ route('front.checkout.index') }}" class="cart-icon">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </a>
-                                    <div class="header-humbager ml-30">
+
+                                    {{-- <div class="header-humbager ml-30">
                                         <a class="sidebar__toggle" href="javascript:void(0)">
                                             <div class="bar-icon-2">
                                                 <img src="{{ asset('newFrontend') }}/img/icon/icon-13.svg"
                                                     alt="img" />
                                             </div>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -388,7 +373,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route("front.contact") }}">Contact</a>
+                                                    <a href="{{ route('front.contact') }}">Contact</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -399,29 +384,12 @@
                         <div class="col-6 col-md-6 col-lg-2 col-xl-4 col-xxl-2">
                             <div class="header-right">
                                 <div class="category-oneadjust gap-6 d-flex align-items-center">
-                                    <div class="icon">
-                                        <i class="fa-sharp fa-solid fa-grid-2"></i>
-                                    </div>
-                                    <select name="cate" class="category">
-                                        <option value="1">Category</option>
-                                        <option value="1">
-                                            Web Design
-                                        </option>
-                                        <option value="1">
-                                            Web Development
-                                        </option>
-                                        <option value="1">
-                                            Graphic Design
-                                        </option>
-                                        <option value="1">
-                                            Softwer Eng
-                                        </option>
-                                    </select>
-                                    <form action="#" class="search-toggle-box d-md-block">
-                                        <div class="input-area">
-                                            <input type="text" placeholder="Author" />
-                                            <button class="cmn-btn">
-                                                <i class="far fa-search"></i>
+                                    <form action="{{ route('front.shop') }}" id="search_form" class="search-toggle-box d-md-block">
+
+                                        <div class="input-area" style="border-radius: none !important;">
+                                            <input type="text" placeholder="Search" {{ request('search') }}" name="search">
+                                            <button type="submit" class="cmn-btn" >
+                                                Search
                                             </button>
                                         </div>
                                     </form>
@@ -430,17 +398,24 @@
                                     {{-- <a href="wishlist.html" class="cart-icon">
                                         <i class="fa-regular fa-heart"></i>
                                     </a> --}}
-                                    <a href="" class="cart-icon">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="header-humbager ml-30">
+
+                                        <a href="{{ route('front.checkout.index') }}" class="cart-icon">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        </a>
+
+
+
+
+
+
+                                    {{-- <div class="header-humbager ml-30">
                                         <a class="sidebar__toggle" href="javascript:void(0)">
                                             <div class="bar-icon-2">
                                                 <img src="{{ asset('newFrontend') }}/img/icon/icon-13.svg"
                                                     alt="img" />
                                             </div>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -604,7 +579,8 @@
     <script src="{{ asset('newFrontend/js/include/axios.min.js') }}"></script>
     <script src="{{ asset('newFrontend/js/include/toastify-js.js') }}"></script>
     <script src="{{ asset('newFrontend/js/include/custom.js') }}"></script>
-    @yield('script')
+
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
@@ -633,7 +609,190 @@
     <script src="{{ asset('newFrontend') }}/js/gsap.min.js"></script>
     <!--<< Main.js >>-->
     <script src="{{ asset('newFrontend') }}/js/main.js"></script>
+    @yield('script')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
     @stack('js')
+
+
+    <script>
+        $("#checkout-form").on("submit", function(e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var url = form.attr("action");
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: form.serialize(),
+                success: function(response) {
+                    if (response.status) {
+                        // Clear the cart or perform other actions
+
+                        // Show success message
+                        showToasterMessage(response.msg, "success");
+
+                        // Redirect to a specific URL if needed
+                        window.location.href = response.url;
+                    } else {
+                        // Show error message
+                        showToasterMessage(response.msg, "error");
+                    }
+                },
+                error: function(error) {
+                    // Show error message
+                    showToasterMessage("An error occurred. Please try again later.", "error");
+                }
+            });
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            // ... other AJAX settings ...
+        });
+    </script>
+
+    <script>
+        $(document).on('click', '.remove-item', function(e) {
+            e.preventDefault();
+
+            let id = $(this).data('id');
+            let url = '{{ route('front.cart.destroy', ['id' => ':id']) }}'; // Adjust the route name as needed
+
+            url = url.replace(':id', id); // Replace the placeholder with the actual id
+
+            $.ajax({
+                type: 'GET', // Use GET or POST based on your route definition
+                url: url,
+                success: function(res) {
+                    if (res.status) {
+                        toastr.success(res.msg);
+                        window.location.reload(); // Refresh the page or update the cart UI
+                    } else {
+                        // toastr.error(res.msg);
+                        errorToast(res.msg);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // toastr.error('An error occurred while processing your request.');
+                    errorToast('An error occurred while processing your request.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.inc', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                let exist_qty = $(this).data('exist_qty');
+                let quantityInput = $('.quantity-value[data-id="' + id + '"]');
+                let newQuantity = parseInt(quantityInput.val()) + 1;
+                if (exist_qty < newQuantity) {
+                    // toastr.error('Stock Not Available!!!');
+                    errorToast('Stock Not Available!!!');
+                    return false;
+                } else {
+                    quantityInput.val(newQuantity);
+                    updateSubtotal(id, newQuantity);
+                }
+            });
+
+            $(document).on('click', '.dec', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                let quantityInput = $('.quantity-value[data-id="' + id + '"]');
+                let newQuantity = parseInt(quantityInput.val()) - 1;
+                if (newQuantity >= 1) {
+                    quantityInput.val(newQuantity);
+                    updateSubtotal(id, newQuantity);
+                }
+            });
+
+            $(document).on('click', '.remove-item', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                $(this).closest('tr').remove();
+                updateSubtotal(id, 0);
+            });
+
+            // Add event listener for the "Update" button
+            $(document).on('click', '.update-cart', function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                let quantityInput = $('.quantity-value[data-id="' + id + '"]');
+                let newQuantity = parseInt(quantityInput.val());
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('front.cart.update', ['id' => '__id__']) }}'.replace('__id__',
+                        id),
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        quantity: newQuantity
+                    },
+                    success: function(response) {
+                        // Update subtotal
+                        let subtotal = response.totalAmount.toFixed(2);
+                        $('#subtotal-' + id).text(subtotal);
+
+                        // Update total amount
+                        $('#total-amount').text(response.totalAmount.toFixed(2));
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        // Handle error response, if needed
+                    }
+                });
+            });
+
+            function updateSubtotal(id, quantity) {
+                let price = parseFloat($('#subtotal-' + id).data('price'));
+                let subtotal = price * quantity;
+                $('#subtotal-' + id).text(subtotal.toFixed(2));
+                updateCart(id, quantity);
+            }
+
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                $('.subtotal').each(function() {
+                    totalAmount += parseFloat($(this).text());
+                });
+                $('#total-amount').text(totalAmount.toFixed(2));
+            }
+
+            function updateCart(id, quantity) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('front.cart.update', ['id' => '__id__']) }}'.replace('__id__', id),
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        quantity: quantity
+                    },
+                    success: function(response) {
+                        window.location.reload();
+                        // Handle success response, if needed
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        // Handle error response, if needed
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

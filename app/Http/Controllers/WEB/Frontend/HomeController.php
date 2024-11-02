@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\AboutUs;
 use App\Models\Banner;
+use App\Models\Blog;
 use App\Models\ChildCategory;
 use App\Models\FlashSaleProduct;
 use App\Models\FooterLink;
@@ -135,6 +136,9 @@ class HomeController extends Controller
 
         $testimonials = Testimonial::all();
 
+        $blogs = Blog::with('category')->where('status', 1)->latest()->take(4)->get();
+
+
         // return $testimonials;
         // die();
         // return view('frontend.home.index', compact(
@@ -172,6 +176,7 @@ class HomeController extends Controller
             'newPublished',     // new
             'categories',
             'testimonials',
+            'blogs',
 
         ));
     }
