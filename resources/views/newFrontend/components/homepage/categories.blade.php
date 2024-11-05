@@ -9,10 +9,10 @@
              </div>
              <div class="array-button">
                  <button class="array-prev">
-                     <i class="fal fa-arrow-left"></i>
+                     <i class="fa fa-angle-left"></i>
                  </button>
                  <button class="array-next">
-                     <i class="fal fa-arrow-right"></i>
+                     <i class="fa fa-angle-right"></i>
                  </button>
              </div>
              <div class="swiper book-catagories-slider">
@@ -24,11 +24,14 @@
                          <div class="book-catagories-items">
 
                              <div class="book-thumb">
-                                 <img src="{{ asset('uploads/custom-images2/' . $category->image) }}" alt="img" />
-                                 <div class="circle-shape">
-                                     <img src="{{ asset('newFrontend') }}/img/book-categori/circle-shape.png"
-                                         alt="shape-img" />
-                                 </div>
+                                <a href="{{ route('front.shop') }}?category={{ $category->id }}">
+                                    <img src="{{ asset('uploads/custom-images2/' . $category->image) }}" alt="img" />
+                                    <div class="circle-shape">
+                                        <img src="{{ asset('newFrontend') }}/img/book-categori/circle-shape.png"
+                                            alt="shape-img" />
+                                    </div>
+                                </a>
+
                              </div>
                              <div class="number">{{ $key + 1 }}</div>
                              <h3>

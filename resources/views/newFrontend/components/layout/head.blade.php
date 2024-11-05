@@ -91,7 +91,17 @@
 .header-1 .header-right .menu-cart .cart-icon i {
     color: var(--header);
 }
-    </style>
+
+
+
+
+
+/* Custom modal width */
+#searchModal .modal-dialog {
+    max-width: 700px; /* Adjust width as needed */
+    margin: auto;
+}
 
     </style>
+
 </head>

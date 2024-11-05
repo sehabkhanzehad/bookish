@@ -166,6 +166,14 @@
                         <a class="d-none" href=""></a>
                     </li>
                 </ul>
+                <ul class="contact-list">
+                    <li>
+                        <button
+                        style="border: 2px solid white; padding: 2px 10px; border-radius: 50px;" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <i class="fas fa-search"></i>    
+                    </button>
+                    </li>
+                </ul>
                 <ul class="list main-menu">
                     @if (Auth::check())
                         {{-- <li><button style="border: 2px solid white; padding: 2px 10px; border-radius: 0px 10px 0px 10px;">{{ Auth::user()->name }} <i class="fas fa-angle-down"></i></button></li> --}}
@@ -275,7 +283,7 @@
                         </div>
                         <div class="col-6 col-md-6 col-lg-2 col-xl-4 col-xxl-2">
                             <div class="header-right">
-                                <div class="category-oneadjust gap-6 d-flex align-items-center">
+                                {{-- <div class="category-oneadjust gap-6 d-flex align-items-center">
                                     <form action="{{ route('front.shop') }}" id="search_form" class="search-toggle-box d-md-block">
 
                                         <div class="input-area" style="border-radius: none !important;">
@@ -285,7 +293,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
                                 <div class="menu-cart">
                                     {{-- <a href="wishlist.html" class="cart-icon">
                                         <i class="fa-regular fa-heart"></i>
@@ -383,7 +391,7 @@
                         </div>
                         <div class="col-6 col-md-6 col-lg-2 col-xl-4 col-xxl-2">
                             <div class="header-right">
-                                <div class="category-oneadjust gap-6 d-flex align-items-center">
+                                {{-- <div class="category-oneadjust gap-6 d-flex align-items-center">
                                     <form action="{{ route('front.shop') }}" id="search_form" class="search-toggle-box d-md-block">
 
                                         <div class="input-area" style="border-radius: none !important;">
@@ -393,7 +401,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
                                 <div class="menu-cart">
                                     {{-- <a href="wishlist.html" class="cart-icon">
                                         <i class="fa-regular fa-heart"></i>
@@ -424,6 +432,51 @@
             </div>
         </div>
     </header>
+
+    <!-- Search Modal -->
+    {{-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="close-btn">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="identityBox">
+                        <div class="form-wrapper">
+
+                            <form action="{{ route('front.shop') }}" id="search_form" class="search-toggle-box d-md-block">
+                                    <input class="inputField" type="text" placeholder="Search" value="{{ request('search') }}" name="search">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div> --}}
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="close-btn">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="w-50 mx-auto">
+                        <div class="">
+                            <form action="{{ route('front.shop') }}" id="search_form" class="">
+                                <input class="form-control" style="border-left: none; border-right: none; border-top: none; border-radius: 0; outline: none; box-shadow: none;" type="text" placeholder="Search" value="{{ request('search') }}" name="search">
+                                {{-- <button type="submit" class="theme-btn">Search</button> --}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

@@ -21,7 +21,7 @@
                                 {{ $blog->created_at->format('d, M') }}
                             </li>
                             <li>
-                                @php
+                                    @php
                                         $user = \App\Models\User::find($blog->admin_id);
                                     @endphp
                                    {{ $user->name }}

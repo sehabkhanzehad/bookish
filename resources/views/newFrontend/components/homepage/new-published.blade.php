@@ -1,5 +1,5 @@
  <!-- New Publish Section start  -->
- <section class="shop-section section-padding fix pt-0">
+ <section class="shop-section section-padding fix pt-4">
      <div class="container">
          <div class="section-title-area">
              <div class="section-title wow fadeInUp" data-wow-delay=".3s">

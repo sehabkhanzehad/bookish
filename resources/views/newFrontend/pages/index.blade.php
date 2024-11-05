@@ -4,10 +4,9 @@ Bookish - Home
 @endsection
 @section('content')
     @include("newFrontend.components.homepage.hero")
-
-    @include("newFrontend.components.homepage.feature")
-    @include("newFrontend.components.homepage.new-published")
     @include("newFrontend.components.homepage.categories")
+
+    @include("newFrontend.components.homepage.new-published")
     @include("newFrontend.components.homepage.pre-order")
     {{-- <!-- Shop Section start  -->
     <section class="shop-section section-padding fix pt-0">
@@ -1252,6 +1251,8 @@ Bookish - Home
             </div>
         </div>
     </section> --}}
+
+    @include("newFrontend.components.homepage.feature")
 
     <!-- Testimonial Section start  -->
     @include("newFrontend.components.homepage.testimonial")
