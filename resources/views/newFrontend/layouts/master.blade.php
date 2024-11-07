@@ -61,6 +61,9 @@
         </div>
     </div>
 
+
+
+
     <!-- Back To Top start -->
     <button id="back-top" class="back-to-top">
         <i class="fa-solid fa-chevron-up"></i>
@@ -129,7 +132,49 @@
         </div>
     </div>
     <div class="offcanvas__overlay"></div>
+ <style>
+        .floating-cart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
 
+        .floating-cart .cart-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            color: #000;
+            font-size: 24px;
+        }
+
+        .floating-cart .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff0000;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
+    @php $cart = session()->get('cart', []); @endphp
+
+    <!-- Floating Cart Menu for Mobile View -->
+    <div class="floating-cart d-lg-none">
+        <a href="{{ route('front.checkout.index') }}" class="cart-icon">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            <span class="cart-count">{{ count($cart) }} </span>
+        </a>
+    </div>
+
+   
     <div class="header-top-1">
         <div class="container">
             <div class="header-top-wrapper">
