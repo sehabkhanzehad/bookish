@@ -1,5 +1,5 @@
-
 @php $cart = session()->get('cart', []); @endphp
+
 <head>
     <!-- ========== Meta Tags ========== -->
     <meta charset="UTF-8" />
@@ -39,69 +39,69 @@
     <link rel="stylesheet" href="{{ asset('newFrontend/css/include/toastify.min.css') }}">
 
     <style>
+        .header-1 .header-right .menu-cart {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 30px 0 30px 35px;
+        }
 
-.header-1 .header-right .menu-cart {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 30px 0 30px 35px;
-}
+        @media (max-width: 1199px) {
+            .header-1 .header-right .menu-cart {
+                padding: 0;
+            }
+        }
 
-@media (max-width: 1199px) {
-    .header-1 .header-right .menu-cart {
-        padding: 0;
-    }
-}
+        .header-1 .header-right .menu-cart .cart-icon {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: transparent;
+            display: inline-block;
+            border-radius: 50%;
+            border: 1px solid rgba(79, 83, 107, 0.3);
+        }
 
-.header-1 .header-right .menu-cart .cart-icon {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    line-height: 50px;
-    background-color: transparent;
-    display: inline-block;
-    border-radius: 50%;
-    border: 1px solid rgba(79, 83, 107, 0.3);
-}
+        @media (max-width: 1199px) {
+            .header-1 .header-right .menu-cart .cart-icon {
+                display: none;
+            }
+        }
 
-@media (max-width: 1199px) {
-    .header-1 .header-right .menu-cart .cart-icon {
-        display: none;
-    }
-}
+    
+        .header-1 .header-right .menu-cart .cart-icon::before {
+            position: absolute;
+            top: -7px;
+            left: 0;
+            content: "{{ count($cart) }}";
+            width: 18px;
+            line-height: 18px;
+            height: 18px;
+            border-radius: 18px;
+            background-color: var(--theme);
+            color: var(--white);
+            font-size: 12px;
+            text-align: center;
+            font-weight: 500;
+        }
 
-.header-1 .header-right .menu-cart .cart-icon::before {
-    position: absolute;
-    top: -7px;
-    left: 0;
-    content: "{{ count($cart) }}";
-    width: 18px;
-    line-height: 18px;
-    height: 18px;
-    border-radius: 18px;
-    background-color: var(--theme);
-    color: var(--white);
-    font-size: 12px;
-    text-align: center;
-    font-weight: 500;
-}
-
-.header-1 .header-right .menu-cart .cart-icon i {
-    color: var(--header);
-}
-
-
+        .header-1 .header-right .menu-cart .cart-icon i {
+            color: var(--header);
+        }
 
 
 
-/* Custom modal width */
-#searchModal .modal-dialog {
-    max-width: 700px; /* Adjust width as needed */
-    margin: auto;
-}
 
+
+        /* Custom modal width */
+        #searchModal .modal-dialog {
+            max-width: 700px;
+            /* Adjust width as needed */
+            margin: auto;
+        }
     </style>
 
 </head>
