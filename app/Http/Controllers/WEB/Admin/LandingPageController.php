@@ -159,7 +159,7 @@ class LandingPageController extends Controller
     //     }
         // dd($request->all());
         $data=$request->validate([
-             'title1'=> 'required',
+            //  'title1'=> 'required',
             //  'title2'=> 'required',
              'video_url'=> '',
              'landing_bg'=> '',
@@ -378,11 +378,11 @@ return response()->json($data);
     public function landing_page($id)
     {
         $ln_pg = LandingPage::with('product')->where('id', $id)->first();
-        $title = $ln_pg->title1;
+        // $title = $ln_pg->title1;
         $shippings = Shipping::with('city')->orderBy('id', 'asc')->get();
         // dd($ln_pg);
         // return view('admin.LandingPage.land_page', compact('ln_pg', 'shippings','title'));
-        return view('admin.LandingPage.ld', compact('ln_pg', 'shippings','title'));
+        return view('admin.LandingPage.ld', compact('ln_pg', 'shippings',));
     }
 
     public function landing_page_two($id)

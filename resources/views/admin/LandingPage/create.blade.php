@@ -45,7 +45,7 @@
         <!--        <textarea class="form-control summernote" name="title2" rows="10" cols="10"></textarea>-->
         <!--    </div>-->
         <!--</div>-->
-        
+
         <div class="col-lg-12">
             <div class="mb-3">
                 <label  class="form-label">Background Image</label>
@@ -55,101 +55,41 @@
 
         <div class="col-lg-12">
             <div class="mb-3">
-                <label  class="form-label">Video Url (Embedded Code)</label>
+                <label  class="form-label">Video Url</label>
                 <input type="text" name="video_url" class="form-control" placeholder="Title">
             </div>
         </div>
-        
+
+
+
         <div class="col-lg-12">
             <div class="mb-3">
-                <label  class="form-label">Call Text</label>
-                <input type="text" name="call_text" class="form-control" placeholder="Title">
-            </div>
-        </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Regular Price Text</label>
+                <label  class="form-label">Regular Price</label>
                 <input type="text" name="regular_price_text" class="form-control" placeholder="Title">
             </div>
         </div>
-        
+
         <div class="col-lg-12">
             <div class="mb-3">
-                <label  class="form-label">Offer Price Text</label>
+                <label  class="form-label">Offer Price</label>
                 <input type="text" name="offer_price_text" class="form-control" placeholder="Title">
             </div>
         </div>
-        
+
         <div class="col-lg-12">
             <div class="mb-3">
-                <label  class="form-label">Left Side Text</label>
+                <label  class="form-label">Title</label>
                 <input type="text" name="left_side_title" class="form-control" placeholder="Title">
             </div>
         </div>
-        
+
         <div class="col-lg-12">
             <div class="mb-3">
-                <label  class="form-label">Left Side Details</label>
+                <label  class="form-label">Description</label>
                 <textarea class="form-control summernote" name="left_side_desc" rows="10" cols="10"></textarea>
             </div>
         </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Right Side Text</label>
-                <input type="text" name="right_side_title" class="form-control" placeholder="Title">
-            </div>
-        </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Right Side Details</label>
-                <textarea class="form-control summernote" name="right_side_desc" rows="10" cols="10"></textarea>
-            </div>
-        </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Top Heading Text</label>
-                <input type="text" name="top_heading_text" class="form-control" placeholder="Title">
-            </div>
-        </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Left Product Details</label>
-                <textarea class="form-control summernote" name="left_product_details" rows="10" cols="10"></textarea>
-            </div>
-        </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Left Product Image</label>
-                <input type="file" name="right_product_image" class="form-control">
-            </div>
-        </div>
 
-        <!--<div class="col-lg-12">-->
-        <!--    <div class="mb-3">-->
-        <!--        <label  class="form-label">Product Overview</label>-->
-        <!--        <textarea class="form-control summernote" name="des1" rows="10" cols="10"></textarea>-->
-        <!--    </div>-->
-        <!--</div>-->
-
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Slider Top Text</label>
-                 <input type="text" name="feature" class="form-control" placeholder="Title">
-            </div>
-        </div>
-
-        <!--<div class="col-lg-12">-->
-        <!--    <div class="mb-3">-->
-        <!--        <label class="form-label">Image</label>-->
-        <!--       <input type="file" name="image" class="form-control">-->
-        <!--    </div>-->
-        <!--</div>-->
 
         <div class="col-lg-12">
             <div class="mb-3">
@@ -157,55 +97,7 @@
                <input type="file" name="sliderimage[]" class="form-control" multiple>
             </div>
         </div>
-        
-        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label  class="form-label">Review Top Text</label>
-                                 <input type="text" name="review_top_text" class="form-control" placeholder="Review Text">
-                            </div>
-                        </div>
-        
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Review Image</label>
-               <input type="file" name="review_product_image[]" class="form-control" multiple>
-            </div>
-        </div>
 
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Old Price</label>
-                <input type="text" name="old_price" class="form-control" placeholder="Title">
-            </div>
-        </div> 
-
-        <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">New Price</label>
-                <input type="text" name="new_price" class="form-control" placeholder="Title">
-            </div>
-        </div> 
-        
-         <div class="col-lg-12">
-            <div class="mb-3">
-                <label  class="form-label">Phone Number</label>
-                <input type="text" name="phone" class="form-control" placeholder="Title">
-            </div>
-        </div> 
-
-        <!--<div class="col-lg-12">-->
-        <!--    <div class="mb-3">-->
-        <!--        <label  class="form-label">Feature</label>-->
-        <!--        <textarea class="form-control summernote" name="des3" rows="10" cols="10"></textarea>-->
-        <!--    </div>-->
-        <!--</div>-->
-
-        <!--<div class="col-lg-12">-->
-        <!--    <div class="mb-3">-->
-        <!--        <label  class="form-label">Home Delivery</label>-->
-        <!--        <input type="text" name="pay_text" class="form-control" placeholder="Title">-->
-        <!--    </div>-->
-        <!--</div>-->
 
         <div class="col-lg-12">
             <div class="mb-3">
@@ -288,7 +180,7 @@
            return false;
         }
       });
-      
+
       $(function () {
     $('#search2').autocomplete({
         source: function (request, response) {
@@ -301,17 +193,17 @@
                 },
                 success: function (data) {
                     if (data.length == 0) {
-                        
+
                         toastr.error('Product Or Stock Not Found2');
                     } else if (data.length == 1) {
-                      
+
                         if (products.indexOf(data[0].id) == -1) {
                             landingProductEntry(data[0]);
                             products.push(data[0].id);
                         }
                         $('#search2').val('');
                     } else if (data.length > 1) {
-                       
+
                         // response(data); // This line is correct for showing options
                         if (products.indexOf(data[0].id) == -1) {
                             landingProductEntry(data[0]);
@@ -333,8 +225,8 @@
     });
 });
 
-      
-      
+
+
 
       function landingProductEntry(item)
       {

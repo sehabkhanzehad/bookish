@@ -83,7 +83,7 @@ font-size: 20px;
 font-family: 'Hind Siliguri', sans-serif !important;
 background: #FFA500">
                         <div class="offer_price" style="font-family: 'Hind Siliguri', sans-serif !important;">
-                            {{ BanglaText('offer') }} {{ $ln_pg->new_price }} {{ BanglaText('tk') }}
+                            {{ BanglaText('offer') }} {{ $ln_pg->regular_price_text }} {{ BanglaText('tk') }}
                         </div>
 
                     </div>
