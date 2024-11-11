@@ -1491,7 +1491,8 @@
                          font-family: 'Hind Siliguri', sans-serif !important;
     padding: 10px;
     font-size: 27px;">
-                                <del>{!! $ln_pg->regular_price_text !!}</del></p>
+                                <del>{!! $ln_pg->regular_price_text !!}</del>
+                            </p>
                             <p style="font-size: 27px;font-family: 'Hind Siliguri', sans-serif !important;">
                                 {!! $ln_pg->offer_price_text !!}</p>
                         </div>
@@ -1671,6 +1672,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div id="element_widget" class="element-widget-cover">
                     <div class="element-widget-wrap">
                         <div class="element-widget ord" style="margin-bottom: 25px;">
